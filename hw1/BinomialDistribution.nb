@@ -1,0 +1,2492 @@
+(************** Content-type: application/mathematica **************
+                     CreatedBy='Mathematica 5.2'
+
+                    Mathematica-Compatible Notebook
+
+This notebook can be used with any Mathematica-compatible
+application, such as Mathematica, MathReader or Publicon. The data
+for the notebook starts with the line containing stars above.
+
+To get the notebook into a Mathematica-compatible application, do
+one of the following:
+
+* Save the data starting with the line of stars above into a file
+  with a name ending in .nb, then open the file inside the
+  application;
+
+* Copy the data starting with the line of stars above to the
+  clipboard, then use the Paste menu command inside the application.
+
+Data for notebooks contains only printable 7-bit ASCII and can be
+sent directly in email or through ftp in text mode.  Newlines can be
+CR, LF or CRLF (Unix, Macintosh or MS-DOS style).
+
+NOTE: If you modify the data for this notebook not in a Mathematica-
+compatible application, you must delete the line below containing
+the word CacheID, otherwise Mathematica-compatible applications may
+try to use invalid cache data.
+
+For more information on notebooks and Mathematica-compatible 
+applications, contact Wolfram Research:
+  web: http://www.wolfram.com
+  email: info@wolfram.com
+  phone: +1-217-398-0700 (U.S.)
+
+Notebook reader applications are available free of charge from 
+Wolfram Research.
+*******************************************************************)
+
+(*CacheID: 232*)
+
+
+(*NotebookFileLineBreakTest
+NotebookFileLineBreakTest*)
+(*NotebookOptionsPosition[     82230,       2299]*)
+(*NotebookOutlinePosition[     82902,       2322]*)
+(*  CellTagsIndexPosition[     82858,       2318]*)
+(*WindowFrame->Normal*)
+
+
+
+Notebook[{
+
+Cell[CellGroupData[{
+Cell["Binomial Distribution", "Title"],
+
+Cell[CellGroupData[{
+
+Cell["Author", "Subsection"],
+
+Cell["\<\
+Eric W. Weisstein
+July 10, 2003\
+\>", "Text"],
+
+Cell[TextData[{
+  "This notebook downloaded from ",
+  ButtonBox["http://mathworld.wolfram.com/notebooks/Statistics/\
+BinomialDistribution.nb",
+    ButtonData:>{
+      URL[ 
+      "http://mathworld.wolfram.com/notebooks/Statistics/BinomialDistribution.\
+nb"], None},
+    ButtonStyle->"Hyperlink"],
+  "."
+}], "Text"],
+
+Cell[TextData[{
+  "For more information, see Eric's ",
+  StyleBox["MathWorld",
+    FontSlant->"Italic"],
+  " entry ",
+  ButtonBox["http://mathworld.wolfram.com/BinomialDistribution.html",
+    ButtonData:>{
+      URL[ "http://mathworld.wolfram.com/BinomialDistribution.html"], None},
+    ButtonStyle->"Hyperlink"],
+  "."
+}], "Text"],
+
+Cell[TextData[{
+  "For a list of Eric's packages that may be needed to evaluate this \
+notebook, see ",
+  ButtonBox["http://mathworld.wolfram.com/packages/",
+    ButtonData:>{
+      URL[ "http://mathworld.wolfram.com/packages/"], None},
+    ButtonStyle->"Hyperlink"],
+  ".  An archive of these packages may be downloaded from ",
+  ButtonBox["http://mathworld.wolfram.com/packages/MathWorldPackages.zip",
+    ButtonData:>{
+      URL[ "http://mathworld.wolfram.com/packages/MathWorldPackages.zip"], 
+      None},
+    ButtonStyle->"Hyperlink"],
+  ", as well as from the ",
+  StyleBox["Mathematica Information Center",
+    FontSlant->"Italic"],
+  "'s ",
+  ButtonBox["MathSource item 4775",
+    ButtonData:>{
+      URL[ "http://library.wolfram.com/infocenter/MathSource/4775/"], None},
+    ButtonStyle->"Hyperlink"],
+  "."
+}], "Text"],
+
+Cell["\<\
+\[Copyright]2005 Wolfram Research, Inc. except for portions noted \
+otherwise\
+\>", "Text"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Additional Authors", "Subsection"],
+
+Cell["\<\
+Mean deviation by Michael Trott
+June 28, 2002\
+\>", "Text"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Initialization", "Subsection"],
+
+Cell[BoxData[
+    RowBox[{"<<", "MathWorld`Stats`"}]], "Input",
+  InitializationCell->True]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Plot", "Section"],
+
+Cell[CellGroupData[{
+
+Cell["\<\
+t=.1;
+BarChart[Table[PDF[BinomialDistribution[20,.5],i],{i,1,20}],BarGroupSpacing->\
+0,
+  PlotRange->All,Ticks->None]\
+\>", "Input",
+  CellDingbat->None,
+  AspectRatioFixed->True],
+
+Cell[GraphicsData["PostScript", "\<\
+%!
+%%Creator: Mathematica
+%%AspectRatio: .61803 
+MathPictureStart
+%% Graphics
+/Courier findfont 10  scalefont  setfont
+% Scaling calculations
+0 0.047619 0.0147151 3.3406 [
+[ -0.001 -0.001 0 0 ]
+[ 1.001 .61903 0 0 ]
+] MathScale
+% Start of Graphics
+1 setlinecap
+1 setlinejoin
+newpath
+[ ] 0 setdash
+0 g
+p
+p
+.002 w
+0 .01472 m
+1 .01472 L
+s
+P
+p
+.002 w
+.02381 0 m
+.02381 .61803 L
+s
+P
+P
+p
+p
+p
+1 0 0 r
+.02381 .01472 m
+.02381 .01478 L
+.07143 .01478 L
+.07143 .01472 L
+F
+P
+p
+.004 w
+.02381 .01472 m
+.02381 .01478 L
+.07143 .01478 L
+.07143 .01472 L
+.02381 .01472 L
+s
+P
+P
+p
+p
+1 0 0 r
+.07143 .01472 m
+.07143 .01532 L
+.11905 .01532 L
+.11905 .01472 L
+F
+P
+p
+.004 w
+.07143 .01472 m
+.07143 .01532 L
+.11905 .01532 L
+.11905 .01472 L
+.07143 .01472 L
+s
+P
+P
+p
+p
+1 0 0 r
+.11905 .01472 m
+.11905 .01835 L
+.16667 .01835 L
+.16667 .01472 L
+F
+P
+p
+.004 w
+.11905 .01472 m
+.11905 .01835 L
+.16667 .01835 L
+.16667 .01472 L
+.11905 .01472 L
+s
+P
+P
+p
+p
+1 0 0 r
+.16667 .01472 m
+.16667 .03015 L
+.21429 .03015 L
+.21429 .01472 L
+F
+P
+p
+.004 w
+.16667 .01472 m
+.16667 .03015 L
+.21429 .03015 L
+.21429 .01472 L
+.16667 .01472 L
+s
+P
+P
+p
+p
+1 0 0 r
+.21429 .01472 m
+.21429 .06411 L
+.2619 .06411 L
+.2619 .01472 L
+F
+P
+p
+.004 w
+.21429 .01472 m
+.21429 .06411 L
+.2619 .06411 L
+.2619 .01472 L
+.21429 .01472 L
+s
+P
+P
+p
+p
+1 0 0 r
+.2619 .01472 m
+.2619 .1382 L
+.30952 .1382 L
+.30952 .01472 L
+F
+P
+p
+.004 w
+.2619 .01472 m
+.2619 .1382 L
+.30952 .1382 L
+.30952 .01472 L
+.2619 .01472 L
+s
+P
+P
+p
+p
+1 0 0 r
+.30952 .01472 m
+.30952 .26168 L
+.35714 .26168 L
+.35714 .01472 L
+F
+P
+p
+.004 w
+.30952 .01472 m
+.30952 .26168 L
+.35714 .26168 L
+.35714 .01472 L
+.30952 .01472 L
+s
+P
+P
+p
+p
+1 0 0 r
+.35714 .01472 m
+.35714 .41604 L
+.40476 .41604 L
+.40476 .01472 L
+F
+P
+p
+.004 w
+.35714 .01472 m
+.35714 .41604 L
+.40476 .41604 L
+.40476 .01472 L
+.35714 .01472 L
+s
+P
+P
+p
+p
+1 0 0 r
+.40476 .01472 m
+.40476 .54981 L
+.45238 .54981 L
+.45238 .01472 L
+F
+P
+p
+.004 w
+.40476 .01472 m
+.40476 .54981 L
+.45238 .54981 L
+.45238 .01472 L
+.40476 .01472 L
+s
+P
+P
+p
+p
+1 0 0 r
+.45238 .01472 m
+.45238 .60332 L
+.5 .60332 L
+.5 .01472 L
+F
+P
+p
+.004 w
+.45238 .01472 m
+.45238 .60332 L
+.5 .60332 L
+.5 .01472 L
+.45238 .01472 L
+s
+P
+P
+p
+p
+1 0 0 r
+.5 .01472 m
+.5 .54981 L
+.54762 .54981 L
+.54762 .01472 L
+F
+P
+p
+.004 w
+.5 .01472 m
+.5 .54981 L
+.54762 .54981 L
+.54762 .01472 L
+.5 .01472 L
+s
+P
+P
+p
+p
+1 0 0 r
+.54762 .01472 m
+.54762 .41604 L
+.59524 .41604 L
+.59524 .01472 L
+F
+P
+p
+.004 w
+.54762 .01472 m
+.54762 .41604 L
+.59524 .41604 L
+.59524 .01472 L
+.54762 .01472 L
+s
+P
+P
+p
+p
+1 0 0 r
+.59524 .01472 m
+.59524 .26168 L
+.64286 .26168 L
+.64286 .01472 L
+F
+P
+p
+.004 w
+.59524 .01472 m
+.59524 .26168 L
+.64286 .26168 L
+.64286 .01472 L
+.59524 .01472 L
+s
+P
+P
+p
+p
+1 0 0 r
+.64286 .01472 m
+.64286 .1382 L
+.69048 .1382 L
+.69048 .01472 L
+F
+P
+p
+.004 w
+.64286 .01472 m
+.64286 .1382 L
+.69048 .1382 L
+.69048 .01472 L
+.64286 .01472 L
+s
+P
+P
+p
+p
+1 0 0 r
+.69048 .01472 m
+.69048 .06411 L
+.7381 .06411 L
+.7381 .01472 L
+F
+P
+p
+.004 w
+.69048 .01472 m
+.69048 .06411 L
+.7381 .06411 L
+.7381 .01472 L
+.69048 .01472 L
+s
+P
+P
+p
+p
+1 0 0 r
+.7381 .01472 m
+.7381 .03015 L
+.78571 .03015 L
+.78571 .01472 L
+F
+P
+p
+.004 w
+.7381 .01472 m
+.7381 .03015 L
+.78571 .03015 L
+.78571 .01472 L
+.7381 .01472 L
+s
+P
+P
+p
+p
+1 0 0 r
+.78571 .01472 m
+.78571 .01835 L
+.83333 .01835 L
+.83333 .01472 L
+F
+P
+p
+.004 w
+.78571 .01472 m
+.78571 .01835 L
+.83333 .01835 L
+.83333 .01472 L
+.78571 .01472 L
+s
+P
+P
+p
+p
+1 0 0 r
+.83333 .01472 m
+.83333 .01532 L
+.88095 .01532 L
+.88095 .01472 L
+F
+P
+p
+.004 w
+.83333 .01472 m
+.83333 .01532 L
+.88095 .01532 L
+.88095 .01472 L
+.83333 .01472 L
+s
+P
+P
+p
+p
+1 0 0 r
+.88095 .01472 m
+.88095 .01478 L
+.92857 .01478 L
+.92857 .01472 L
+F
+P
+p
+.004 w
+.88095 .01472 m
+.88095 .01478 L
+.92857 .01478 L
+.92857 .01472 L
+.88095 .01472 L
+s
+P
+P
+p
+p
+1 0 0 r
+.92857 .01472 m
+.92857 .01472 L
+.97619 .01472 L
+.97619 .01472 L
+F
+P
+p
+.004 w
+.92857 .01472 m
+.92857 .01472 L
+.97619 .01472 L
+.97619 .01472 L
+.92857 .01472 L
+s
+P
+P
+P
+0 0 m
+1 0 L
+1 .61803 L
+0 .61803 L
+closepath
+clip
+newpath
+% End of Graphics
+MathPictureEnd
+\
+\>"], "Graphics",
+  CellDingbat->None,
+  Evaluatable->False,
+  AspectRatioFixed->True,
+  ImageSize->{282, 174},
+  ImageMargins->{{34, Inherited}, {Inherited, Inherited}},
+  ImageCache->GraphicsData["Bitmap", "\<\
+CF5dJ6E]HGAYHf4PAg9QL6QYHg<PAVmbKF5d0`40004J0000[Q000`40O003h00Oogoo6goo0007Ool0
+0`00Oomoo`3oOolAOol000Moo`03001oogoo0?mooa5oo`001goo00<007ooOol0ogoo4Goo0007Ool0
+0`00Oomoo`3oOolAOol00?l001X0005oo`001goo00<007ooOol067oo3P0037`000<007`0O0002g`0
+00<007`0O0002W`000<007`0O0002W`000<007`0O0002W`000<007`0O0002g`000<007`0O0002W`0
+00<007`0O0002W`000<007`0O0002g`000<007`0O0002W`000<007`0O0002W`000<007`0O0002W`0
+00<007`0O0002g`03P00<7oo0007Ool00`00Oomoo`0UOol00`00O01l000:O0000`00O01l000;O000
+0`00O01l000:O0000`00O01l000:O0000`00O01l000:O0000`00O01l000;O0000`00O01l000:O000
+0`00O01l000:O0000`00O01l000;O0000`00O01l000:O0000`00O01l000:O0000`00O01l000:O000
+0`00O01l000;O0000`00Oomoo`0kOol000Moo`03001oogoo02Eoo`03001l07`000Yl0003001l07`0
+00]l0003001l07`000Yl0003001l07`000Yl0003001l07`000Yl0003001l07`000]l0003001l07`0
+00Yl0003001l07`000Yl0003001l07`000]l0003001l07`000Yl0003001l07`000Yl0003001l07`0
+00Yl0003001l07`000]l0003001oogoo03]oo`001goo00<007ooOol09Goo3P003G`000<007`0O000
+2W`000<007`0O0002W`000<007`0O0002W`000<007`0O0002g`000<007`0O0002W`000<007`0O000
+2W`000<007`0O0002g`000<007`0O0002W`000<007`0O0002W`000<007`0O0002W`03`00?Goo0007
+Ool00`00Oomoo`0bOol00`00O01l000;O0000`00O01l000:O0000`00O01l000:O0000`00O01l000:
+O0000`00O01l000;O0000`00O01l000:O0000`00O01l000:O0000`00O01l000;O0000`00O01l000:
+O0000`00O01l000:O0000`00O01l000:O0000`00Oomoo`19Ool000Moo`03001oogoo039oo`03001l
+07`000]l0003001l07`000Yl0003001l07`000Yl0003001l07`000Yl0003001l07`000]l0003001l
+07`000Yl0003001l07`000Yl0003001l07`000]l0003001l07`000Yl0003001l07`000Yl0003001l
+07`000Yl0003001oogoo04Uoo`001goo00<007ooOol0<Woo00<007`0O0002g`000<007`0O0002W`0
+00<007`0O0002W`000<007`0O0002W`000<007`0O0002g`000<007`0O0002W`000<007`0O0002W`0
+00<007`0O0002g`000<007`0O0002W`000<007`0O0002W`000<007`0O0002W`000<007ooOol0BGoo
+0007Ool00`00Oomoo`0bOol00`00O01l000;O0000`00O01l000:O0000`00O01l000:O0000`00O01l
+000:O0000`00O01l000;O0000`00O01l000:O0000`00O01l000:O0000`00O01l000;O0000`00O01l
+000:O0000`00O01l000:O0000`00O01l000:O0000`00Oomoo`19Ool000Moo`03001oogoo039oo`03
+001l07`000]l0003001l07`000Yl0003001l07`000Yl0003001l07`000Yl0003001l07`000]l0003
+001l07`000Yl0003001l07`000Yl0003001l07`000]l0003001l07`000Yl0003001l07`000Yl0003
+001l07`000Yl0003001oogoo04Uoo`001goo00<007ooOol0<Woo00<007`0O0002g`000<007`0O000
+2W`000<007`0O0002W`000<007`0O0002W`000<007`0O0002g`000<007`0O0002W`000<007`0O000
+2W`000<007`0O0002g`000<007`0O0002W`000<007`0O0002W`000<007`0O0002W`000<007ooOol0
+BGoo0007Ool00`00Oomoo`0bOol00`00O01l000;O0000`00O01l000:O0000`00O01l000:O0000`00
+O01l000:O0000`00O01l000;O0000`00O01l000:O0000`00O01l000:O0000`00O01l000;O0000`00
+O01l000:O0000`00O01l000:O0000`00O01l000:O0000`00Oomoo`19Ool000Moo`03001oogoo039o
+o`03001l07`000]l0003001l07`000Yl0003001l07`000Yl0003001l07`000Yl0003001l07`000]l
+0003001l07`000Yl0003001l07`000Yl0003001l07`000]l0003001l07`000Yl0003001l07`000Yl
+0003001l07`000Yl0003001oogoo04Uoo`001goo00<007ooOol0<Woo00<007`0O0002g`000<007`0
+O0002W`000<007`0O0002W`000<007`0O0002W`000<007`0O0002g`000<007`0O0002W`000<007`0
+O0002W`000<007`0O0002g`000<007`0O0002W`000<007`0O0002W`000<007`0O0002W`000<007oo
+Ool0BGoo0007Ool00`00Oomoo`0bOol?000<O0000`00O01l000:O0000`00O01l000:O0000`00O01l
+000;O0000`00O01l000:O0000`00O01l000:O0000`00O01l000;O0000`00O01l000:O0000`00O01l
+000:O00>001;Ool000Moo`03001oogoo041oo`03001l07`000Yl0003001l07`000Yl0003001l07`0
+00Yl0003001l07`000]l0003001l07`000Yl0003001l07`000Yl0003001l07`000]l0003001l07`0
+00Yl0003001l07`000Yl0003001oogoo05Ioo`001goo00<007ooOol0@7oo00<007`0O0002W`000<0
+07`0O0002W`000<007`0O0002W`000<007`0O0002g`000<007`0O0002W`000<007`0O0002W`000<0
+07`0O0002g`000<007`0O0002W`000<007`0O0002W`000<007ooOol0EWoo0007Ool00`00Oomoo`10
+Ool00`00O01l000:O0000`00O01l000:O0000`00O01l000:O0000`00O01l000;O0000`00O01l000:
+O0000`00O01l000:O0000`00O01l000;O0000`00O01l000:O0000`00O01l000:O0000`00Oomoo`1F
+Ool000Moo`03001oogoo041oo`03001l07`000Yl0003001l07`000Yl0003001l07`000Yl0003001l
+07`000]l0003001l07`000Yl0003001l07`000Yl0003001l07`000]l0003001l07`000Yl0003001l
+07`000Yl0003001oogoo05Ioo`001goo00<007ooOol0@7oo00<007`0O0002W`000<007`0O0002W`0
+00<007`0O0002W`000<007`0O0002g`000<007`0O0002W`000<007`0O0002W`000<007`0O0002g`0
+00<007`0O0002W`000<007`0O0002W`000<007ooOol0EWoo0007Ool00`00Oomoo`10Ool00`00O01l
+000:O0000`00O01l000:O0000`00O01l000:O0000`00O01l000;O0000`00O01l000:O0000`00O01l
+000:O0000`00O01l000;O0000`00O01l000:O0000`00O01l000:O0000`00Oomoo`1FOol000Moo`03
+001oogoo041oo`03001l07`000Yl0003001l07`000Yl0003001l07`000Yl0003001l07`000]l0003
+001l07`000Yl0003001l07`000Yl0003001l07`000]l0003001l07`000Yl0003001l07`000Yl0003
+001oogoo05Ioo`001goo00<007ooOol0@7oo00<007`0O0002W`000<007`0O0002W`000<007`0O000
+2W`000<007`0O0002g`000<007`0O0002W`000<007`0O0002W`000<007`0O0002g`000<007`0O000
+2W`000<007`0O0002W`000<007ooOol0EWoo0007Ool00`00Oomoo`10Ool00`00O01l000:O0000`00
+O01l000:O0000`00O01l000:O0000`00O01l000;O0000`00O01l000:O0000`00O01l000:O0000`00
+O01l000;O0000`00O01l000:O0000`00O01l000:O0000`00Oomoo`1FOol000Moo`03001oogoo041o
+o`03001l07`000Yl0003001l07`000Yl0003001l07`000Yl0003001l07`000]l0003001l07`000Yl
+0003001l07`000Yl0003001l07`000]l0003001l07`000Yl0003001l07`000Yl0003001oogoo05Io
+o`001goo00<007ooOol0@7oo00<007`0O0002W`000<007`0O0002W`000<007`0O0002W`000<007`0
+O0002g`000<007`0O0002W`000<007`0O0002W`000<007`0O0002g`000<007`0O0002W`000<007`0
+O0002W`000<007ooOol0EWoo0007Ool00`00Oomoo`10Ool00`00O01l000:O0000`00O01l000:O000
+0`00O01l000:O0000`00O01l000;O0000`00O01l000:O0000`00O01l000:O0000`00O01l000;O000
+0`00O01l000:O0000`00O01l000:O0000`00Oomoo`1FOol000Moo`03001oogoo041oo`03001l07`0
+00Yl0003001l07`000Yl0003001l07`000Yl0003001l07`000]l0003001l07`000Yl0003001l07`0
+00Yl0003001l07`000]l0003001l07`000Yl0003001l07`000Yl0003001oogoo05Ioo`001goo00<0
+07ooOol0@7oo00<007`0O0002W`000<007`0O0002W`000<007`0O0002W`000<007`0O0002g`000<0
+07`0O0002W`000<007`0O0002W`000<007`0O0002g`000<007`0O0002W`000<007`0O0002W`000<0
+07ooOol0EWoo0007Ool00`00Oomoo`10Ool00`00O01l000:O0000`00O01l000:O0000`00O01l000:
+O0000`00O01l000;O0000`00O01l000:O0000`00O01l000:O0000`00O01l000;O0000`00O01l000:
+O0000`00O01l000:O0000`00Oomoo`1FOol000Moo`03001oogoo041oo`03001l07`000Yl0003001l
+07`000Yl0003001l07`000Yl0003001l07`000]l0003001l07`000Yl0003001l07`000Yl0003001l
+07`000]l0003001l07`000Yl0003001l07`000Yl0003001oogoo05Ioo`001goo00<007ooOol0@7oo
+00<007`0O0002W`000<007`0O0002W`000<007`0O0002W`000<007`0O0002g`000<007`0O0002W`0
+00<007`0O0002W`000<007`0O0002g`000<007`0O0002W`000<007`0O0002W`000<007ooOol0EWoo
+0007Ool00`00Oomoo`10Ool00`00O01l000:O0000`00O01l000:O0000`00O01l000:O0000`00O01l
+000;O0000`00O01l000:O0000`00O01l000:O0000`00O01l000;O0000`00O01l000:O0000`00O01l
+000:O0000`00Oomoo`1FOol000Moo`03001oogoo041oo`03001l07`000Yl0003001l07`000Yl0003
+001l07`000Yl0003001l07`000]l0003001l07`000Yl0003001l07`000Yl0003001l07`000]l0003
+001l07`000Yl0003001l07`000Yl0003001oogoo05Ioo`001goo00<007ooOol0@7oo3P0037`000<0
+07`0O0002W`000<007`0O0002g`000<007`0O0002W`000<007`0O0002W`000<007`0O0002g`000<0
+07`0O0002W`03P00F7oo0007Ool00`00Oomoo`1=Ool00`00O01l000:O0000`00O01l000:O0000`00
+O01l000;O0000`00O01l000:O0000`00O01l000:O0000`00O01l000;O0000`00O01l000:O0000`00
+Oomoo`1SOol000Moo`03001oogoo04eoo`03001l07`000Yl0003001l07`000Yl0003001l07`000]l
+0003001l07`000Yl0003001l07`000Yl0003001l07`000]l0003001l07`000Yl0003001oogoo06=o
+o`001goo00<007ooOol0CGoo00<007`0O0002W`000<007`0O0002W`000<007`0O0002g`000<007`0
+O0002W`000<007`0O0002W`000<007`0O0002g`000<007`0O0002W`000<007ooOol0Hgoo0007Ool0
+0`00Oomoo`1=Ool00`00O01l000:O0000`00O01l000:O0000`00O01l000;O0000`00O01l000:O000
+0`00O01l000:O0000`00O01l000;O0000`00O01l000:O0000`00Oomoo`1SOol000Moo`03001oogoo
+04eoo`03001l07`000Yl0003001l07`000Yl0003001l07`000]l0003001l07`000Yl0003001l07`0
+00Yl0003001l07`000]l0003001l07`000Yl0003001oogoo06=oo`001goo00<007ooOol0CGoo00<0
+07`0O0002W`000<007`0O0002W`000<007`0O0002g`000<007`0O0002W`000<007`0O0002W`000<0
+07`0O0002g`000<007`0O0002W`000<007ooOol0Hgoo0007Ool00`00Oomoo`1=Ool00`00O01l000:
+O0000`00O01l000:O0000`00O01l000;O0000`00O01l000:O0000`00O01l000:O0000`00O01l000;
+O0000`00O01l000:O0000`00Oomoo`1SOol000Moo`03001oogoo04eoo`03001l07`000Yl0003001l
+07`000Yl0003001l07`000]l0003001l07`000Yl0003001l07`000Yl0003001l07`000]l0003001l
+07`000Yl0003001oogoo06=oo`001goo00<007ooOol0CGoo00<007`0O0002W`000<007`0O0002W`0
+00<007`0O0002g`000<007`0O0002W`000<007`0O0002W`000<007`0O0002g`000<007`0O0002W`0
+00<007ooOol0Hgoo0007Ool00`00Oomoo`1=Ool00`00O01l000:O0000`00O01l000:O0000`00O01l
+000;O0000`00O01l000:O0000`00O01l000:O0000`00O01l000;O0000`00O01l000:O0000`00Oomo
+o`1SOol000Moo`03001oogoo04eoo`03001l07`000Yl0003001l07`000Yl0003001l07`000]l0003
+001l07`000Yl0003001l07`000Yl0003001l07`000]l0003001l07`000Yl0003001oogoo06=oo`00
+1goo00<007ooOol0CGoo00<007`0O0002W`000<007`0O0002W`000<007`0O0002g`000<007`0O000
+2W`000<007`0O0002W`000<007`0O0002g`000<007`0O0002W`000<007ooOol0Hgoo0007Ool00`00
+Oomoo`1=Ool00`00O01l000:O0000`00O01l000:O0000`00O01l000;O0000`00O01l000:O0000`00
+O01l000:O0000`00O01l000;O0000`00O01l000:O0000`00Oomoo`1SOol000Moo`03001oogoo04eo
+o`03001l07`000Yl0003001l07`000Yl0003001l07`000]l0003001l07`000Yl0003001l07`000Yl
+0003001l07`000]l0003001l07`000Yl0003001oogoo06=oo`001goo00<007ooOol0CGoo00<007`0
+O0002W`000<007`0O0002W`000<007`0O0002g`000<007`0O0002W`000<007`0O0002W`000<007`0
+O0002g`000<007`0O0002W`000<007ooOol0Hgoo0007Ool00`00Oomoo`1=Ool00`00O01l000:O000
+0`00O01l000:O0000`00O01l000;O0000`00O01l000:O0000`00O01l000:O0000`00O01l000;O000
+0`00O01l000:O0000`00Oomoo`1SOol000Moo`03001oogoo04eoo`03001l07`000Yl0003001l07`0
+00Yl0003001l07`000]l0003001l07`000Yl0003001l07`000Yl0003001l07`000]l0003001l07`0
+00Yl0003001oogoo06=oo`001goo00<007ooOol0CGoo00<007`0O0002W`000<007`0O0002W`000<0
+07`0O0002g`000<007`0O0002W`000<007`0O0002W`000<007`0O0002g`000<007`0O0002W`000<0
+07ooOol0Hgoo0007Ool00`00Oomoo`1=Ool00`00O01l000:O0000`00O01l000:O0000`00O01l000;
+O0000`00O01l000:O0000`00O01l000:O0000`00O01l000;O0000`00O01l000:O0000`00Oomoo`1S
+Ool000Moo`03001oogoo04eoo`03001l07`000Yl0003001l07`000Yl0003001l07`000]l0003001l
+07`000Yl0003001l07`000Yl0003001l07`000]l0003001l07`000Yl0003001oogoo06=oo`001goo
+00<007ooOol0CGoo00<007`0O0002W`000<007`0O0002W`000<007`0O0002g`000<007`0O0002W`0
+00<007`0O0002W`000<007`0O0002g`000<007`0O0002W`000<007ooOol0Hgoo0007Ool00`00Oomo
+o`1=Ool00`00O01l000:O0000`00O01l000:O0000`00O01l000;O0000`00O01l000:O0000`00O01l
+000:O0000`00O01l000;O0000`00O01l000:O0000`00Oomoo`1SOol000Moo`03001oogoo04eoo`03
+001l07`000Yl0003001l07`000Yl0003001l07`000]l0003001l07`000Yl0003001l07`000Yl0003
+001l07`000]l0003001l07`000Yl0003001oogoo06=oo`001goo00<007ooOol0CGoo00<007`0O000
+2W`000<007`0O0002W`000<007`0O0002g`000<007`0O0002W`000<007`0O0002W`000<007`0O000
+2g`000<007`0O0002W`000<007ooOol0Hgoo0007Ool00`00Oomoo`1=Ool00`00O01l000:O0000`00
+O01l000:O0000`00O01l000;O0000`00O01l000:O0000`00O01l000:O0000`00O01l000;O0000`00
+O01l000:O0000`00Oomoo`1SOol000Moo`03001oogoo04eoo`03001l07`000Yl0003001l07`000Yl
+0003001l07`000]l0003001l07`000Yl0003001l07`000Yl0003001l07`000]l0003001l07`000Yl
+0003001oogoo06=oo`001goo00<007ooOol0CGoo00<007`0O0002W`000<007`0O0002W`000<007`0
+O0002g`000<007`0O0002W`000<007`0O0002W`000<007`0O0002g`000<007`0O0002W`000<007oo
+Ool0Hgoo0007Ool00`00Oomoo`1=Ool00`00O01l000:O0000`00O01l000:O0000`00O01l000;O000
+0`00O01l000:O0000`00O01l000:O0000`00O01l000;O0000`00O01l000:O0000`00Oomoo`1SOol0
+00Moo`03001oogoo04eoo`03001l07`000Yl0003001l07`000Yl0003001l07`000]l0003001l07`0
+00Yl0003001l07`000Yl0003001l07`000]l0003001l07`000Yl0003001oogoo06=oo`001goo00<0
+07ooOol0CGoo00<007`0O0002W`000<007`0O0002W`000<007`0O0002g`000<007`0O0002W`000<0
+07`0O0002W`000<007`0O0002g`000<007`0O0002W`000<007ooOol0Hgoo0007Ool00`00Oomoo`1=
+Ool00`00O01l000:O0000`00O01l000:O0000`00O01l000;O0000`00O01l000:O0000`00O01l000:
+O0000`00O01l000;O0000`00O01l000:O0000`00Oomoo`1SOol000Moo`03001oogoo04eoo`03001l
+07`000Yl0003001l07`000Yl0003001l07`000]l0003001l07`000Yl0003001l07`000Yl0003001l
+07`000]l0003001l07`000Yl0003001oogoo06=oo`001goo00<007ooOol0CGoo00<007`0O0002W`0
+00<007`0O0002W`000<007`0O0002g`000<007`0O0002W`000<007`0O0002W`000<007`0O0002g`0
+00<007`0O0002W`000<007ooOol0Hgoo0007Ool00`00Oomoo`1=Ool00`00O01l000:O0000`00O01l
+000:O0000`00O01l000;O0000`00O01l000:O0000`00O01l000:O0000`00O01l000;O0000`00O01l
+000:O0000`00Oomoo`1SOol000Moo`03001oogoo04eoo`h000al0003001l07`000]l0003001l07`0
+00Yl0003001l07`000Yl0003001l07`000]l00h006Eoo`001goo00<007ooOol0FWoo00<007`0O000
+2W`000<007`0O0002g`000<007`0O0002W`000<007`0O0002W`000<007`0O0002g`000<007ooOol0
+L7oo0007Ool00`00Oomoo`1JOol00`00O01l000:O0000`00O01l000;O0000`00O01l000:O0000`00
+O01l000:O0000`00O01l000;O0000`00Oomoo`1`Ool000Moo`03001oogoo05Yoo`03001l07`000Yl
+0003001l07`000]l0003001l07`000Yl0003001l07`000Yl0003001l07`000]l0003001oogoo071o
+o`001goo00<007ooOol0FWoo00<007`0O0002W`000<007`0O0002g`000<007`0O0002W`000<007`0
+O0002W`000<007`0O0002g`000<007ooOol0L7oo0007Ool00`00Oomoo`1JOol00`00O01l000:O000
+0`00O01l000;O0000`00O01l000:O0000`00O01l000:O0000`00O01l000;O0000`00Oomoo`1`Ool0
+00Moo`03001oogoo05Yoo`03001l07`000Yl0003001l07`000]l0003001l07`000Yl0003001l07`0
+00Yl0003001l07`000]l0003001oogoo071oo`001goo00<007ooOol0FWoo00<007`0O0002W`000<0
+07`0O0002g`000<007`0O0002W`000<007`0O0002W`000<007`0O0002g`000<007ooOol0L7oo0007
+Ool00`00Oomoo`1JOol00`00O01l000:O0000`00O01l000;O0000`00O01l000:O0000`00O01l000:
+O0000`00O01l000;O0000`00Oomoo`1`Ool000Moo`03001oogoo05Yoo`03001l07`000Yl0003001l
+07`000]l0003001l07`000Yl0003001l07`000Yl0003001l07`000]l0003001oogoo071oo`001goo
+00<007ooOol0FWoo00<007`0O0002W`000<007`0O0002g`000<007`0O0002W`000<007`0O0002W`0
+00<007`0O0002g`000<007ooOol0L7oo0007Ool00`00Oomoo`1JOol00`00O01l000:O0000`00O01l
+000;O0000`00O01l000:O0000`00O01l000:O0000`00O01l000;O0000`00Oomoo`1`Ool000Moo`03
+001oogoo05Yoo`03001l07`000Yl0003001l07`000]l0003001l07`000Yl0003001l07`000Yl0003
+001l07`000]l0003001oogoo071oo`001goo00<007ooOol0FWoo00<007`0O0002W`000<007`0O000
+2g`000<007`0O0002W`000<007`0O0002W`000<007`0O0002g`000<007ooOol0L7oo0007Ool00`00
+Oomoo`1JOol00`00O01l000:O0000`00O01l000;O0000`00O01l000:O0000`00O01l000:O0000`00
+O01l000;O0000`00Oomoo`1`Ool000Moo`03001oogoo05Yoo`03001l07`000Yl0003001l07`000]l
+0003001l07`000Yl0003001l07`000Yl0003001l07`000]l0003001oogoo071oo`001goo00<007oo
+Ool0FWoo00<007`0O0002W`000<007`0O0002g`000<007`0O0002W`000<007`0O0002W`000<007`0
+O0002g`000<007ooOol0L7oo0007Ool00`00Oomoo`1JOol00`00O01l000:O0000`00O01l000;O000
+0`00O01l000:O0000`00O01l000:O0000`00O01l000;O0000`00Oomoo`1`Ool000Moo`03001oogoo
+05Yoo`03001l07`000Yl0003001l07`000]l0003001l07`000Yl0003001l07`000Yl0003001l07`0
+00]l0003001oogoo071oo`001goo00<007ooOol0FWoo00<007`0O0002W`000<007`0O0002g`000<0
+07`0O0002W`000<007`0O0002W`000<007`0O0002g`000<007ooOol0L7oo0007Ool00`00Oomoo`1J
+Ool00`00O01l000:O0000`00O01l000;O0000`00O01l000:O0000`00O01l000:O0000`00O01l000;
+O0000`00Oomoo`1`Ool000Moo`03001oogoo05Yoo`03001l07`000Yl0003001l07`000]l0003001l
+07`000Yl0003001l07`000Yl0003001l07`000]l0003001oogoo071oo`001goo00<007ooOol0FWoo
+00<007`0O0002W`000<007`0O0002g`000<007`0O0002W`000<007`0O0002W`000<007`0O0002g`0
+00<007ooOol0L7oo0007Ool00`00Oomoo`1JOol00`00O01l000:O0000`00O01l000;O0000`00O01l
+000:O0000`00O01l000:O0000`00O01l000;O0000`00Oomoo`1`Ool000Moo`03001oogoo05Yoo`03
+001l07`000Yl0003001l07`000]l0003001l07`000Yl0003001l07`000Yl0003001l07`000]l0003
+001oogoo071oo`001goo00<007ooOol0FWoo00<007`0O0002W`000<007`0O0002g`000<007`0O000
+2W`000<007`0O0002W`000<007`0O0002g`000<007ooOol0L7oo0007Ool00`00Oomoo`1JOol00`00
+O01l000:O0000`00O01l000;O0000`00O01l000:O0000`00O01l000:O0000`00O01l000;O0000`00
+Oomoo`1`Ool000Moo`03001oogoo05Yoo`03001l07`000Yl0003001l07`000]l0003001l07`000Yl
+0003001l07`000Yl0003001l07`000]l0003001oogoo071oo`001goo00<007ooOol0FWoo00<007`0
+O0002W`000<007`0O0002g`000<007`0O0002W`000<007`0O0002W`000<007`0O0002g`000<007oo
+Ool0L7oo0007Ool00`00Oomoo`1JOol00`00O01l000:O0000`00O01l000;O0000`00O01l000:O000
+0`00O01l000:O0000`00O01l000;O0000`00Oomoo`1`Ool000Moo`03001oogoo05Yoo`03001l07`0
+00Yl0003001l07`000]l0003001l07`000Yl0003001l07`000Yl0003001l07`000]l0003001oogoo
+071oo`001goo00<007ooOol0FWoo00<007`0O0002W`000<007`0O0002g`000<007`0O0002W`000<0
+07`0O0002W`000<007`0O0002g`000<007ooOol0L7oo0007Ool00`00Oomoo`1JOol00`00O01l000:
+O0000`00O01l000;O0000`00O01l000:O0000`00O01l000:O0000`00O01l000;O0000`00Oomoo`1`
+Ool000Moo`03001oogoo05Yoo`03001l07`000Yl0003001l07`000]l0003001l07`000Yl0003001l
+07`000Yl0003001l07`000]l0003001oogoo071oo`001goo00<007ooOol0FWoo00<007`0O0002W`0
+00<007`0O0002g`000<007`0O0002W`000<007`0O0002W`000<007`0O0002g`000<007ooOol0L7oo
+0007Ool00`00Oomoo`1JOol00`00O01l000:O0000`00O01l000;O0000`00O01l000:O0000`00O01l
+000:O0000`00O01l000;O0000`00Oomoo`1`Ool000Moo`03001oogoo05Yoo`03001l07`000Yl0003
+001l07`000]l0003001l07`000Yl0003001l07`000Yl0003001l07`000]l0003001oogoo071oo`00
+1goo00<007ooOol0FWoo00<007`0O0002W`000<007`0O0002g`000<007`0O0002W`000<007`0O000
+2W`000<007`0O0002g`000<007ooOol0L7oo0007Ool00`00Oomoo`1JOol00`00O01l000:O0000`00
+O01l000;O0000`00O01l000:O0000`00O01l000:O0000`00O01l000;O0000`00Oomoo`1`Ool000Mo
+o`03001oogoo05Yoo`03001l07`000Yl0003001l07`000]l0003001l07`000Yl0003001l07`000Yl
+0003001l07`000]l0003001oogoo071oo`001goo00<007ooOol0FWoo00<007`0O0002W`000<007`0
+O0002g`000<007`0O0002W`000<007`0O0002W`000<007`0O0002g`000<007ooOol0L7oo0007Ool0
+0`00Oomoo`1JOol00`00O01l000:O0000`00O01l000;O0000`00O01l000:O0000`00O01l000:O000
+0`00O01l000;O0000`00Oomoo`1`Ool000Moo`03001oogoo05Yoo`03001l07`000Yl0003001l07`0
+00]l0003001l07`000Yl0003001l07`000Yl0003001l07`000]l0003001oogoo071oo`001goo00<0
+07ooOol0FWoo3P003G`000<007`0O0002W`000<007`0O0002W`03`00LWoo0007Ool00`00Oomoo`1W
+Ool00`00O01l000;O0000`00O01l000:O0000`00O01l000:O0000`00Oomoo`1nOol000Moo`03001o
+ogoo06Moo`03001l07`000]l0003001l07`000Yl0003001l07`000Yl0003001oogoo07ioo`001goo
+00<007ooOol0Igoo00<007`0O0002g`000<007`0O0002W`000<007`0O0002W`000<007ooOol0OWoo
+0007Ool00`00Oomoo`1WOol00`00O01l000;O0000`00O01l000:O0000`00O01l000:O0000`00Oomo
+o`1nOol000Moo`03001oogoo06Moo`03001l07`000]l0003001l07`000Yl0003001l07`000Yl0003
+001oogoo07ioo`001goo00<007ooOol0Igoo00<007`0O0002g`000<007`0O0002W`000<007`0O000
+2W`000<007ooOol0OWoo0007Ool00`00Oomoo`1WOol00`00O01l000;O0000`00O01l000:O0000`00
+O01l000:O0000`00Oomoo`1nOol000Moo`03001oogoo06Moo`03001l07`000]l0003001l07`000Yl
+0003001l07`000Yl0003001oogoo07ioo`001goo00<007ooOol0Igoo00<007`0O0002g`000<007`0
+O0002W`000<007`0O0002W`000<007ooOol0OWoo0007Ool00`00Oomoo`1WOol00`00O01l000;O000
+0`00O01l000:O0000`00O01l000:O0000`00Oomoo`1nOol000Moo`03001oogoo06Moo`03001l07`0
+00]l0003001l07`000Yl0003001l07`000Yl0003001oogoo07ioo`001goo00<007ooOol0Igoo00<0
+07`0O0002g`000<007`0O0002W`000<007`0O0002W`000<007ooOol0OWoo0007Ool00`00Oomoo`1W
+Ool00`00O01l000;O0000`00O01l000:O0000`00O01l000:O0000`00Oomoo`1nOol000Moo`03001o
+ogoo06Moo`03001l07`000]l0003001l07`000Yl0003001l07`000Yl0003001oogoo07ioo`001goo
+00<007ooOol0Igoo00<007`0O0002g`000<007`0O0002W`000<007`0O0002W`000<007ooOol0OWoo
+0007Ool00`00Oomoo`1WOol00`00O01l000;O0000`00O01l000:O0000`00O01l000:O0000`00Oomo
+o`1nOol000Moo`03001oogoo06Moo`03001l07`000]l0003001l07`000Yl0003001l07`000Yl0003
+001oogoo07ioo`001goo00<007ooOol0Igoo00<007`0O0002g`000<007`0O0002W`000<007`0O000
+2W`000<007ooOol0OWoo0007Ool00`00Oomoo`1WOol00`00O01l000;O0000`00O01l000:O0000`00
+O01l000:O0000`00Oomoo`1nOol000Moo`03001oogoo06Moo`03001l07`000]l0003001l07`000Yl
+0003001l07`000Yl0003001oogoo07ioo`001goo00<007ooOol0Igoo00<007`0O0002g`000<007`0
+O0002W`000<007`0O0002W`000<007ooOol0OWoo0007Ool00`00Oomoo`1WOol00`00O01l000;O000
+0`00O01l000:O0000`00O01l000:O0000`00Oomoo`1nOol000Moo`03001oogoo06Moo`03001l07`0
+00]l0003001l07`000Yl0003001l07`000Yl0003001oogoo07ioo`001goo00<007ooOol0Igoo00<0
+07`0O0002g`000<007`0O0002W`000<007`0O0002W`000<007ooOol0OWoo0007Ool00`00Oomoo`1W
+Ool00`00O01l000;O0000`00O01l000:O0000`00O01l000:O0000`00Oomoo`1nOol000Moo`03001o
+ogoo06Moo`03001l07`000]l0003001l07`000Yl0003001l07`000Yl0003001oogoo07ioo`001goo
+00<007ooOol0Igoo00<007`0O0002g`000<007`0O0002W`000<007`0O0002W`000<007ooOol0OWoo
+0007Ool00`00Oomoo`1WOol00`00O01l000;O0000`00O01l000:O0000`00O01l000:O0000`00Oomo
+o`1nOol000Moo`03001oogoo06Moo`03001l07`000]l0003001l07`000Yl0003001l07`000Yl0003
+001oogoo07ioo`001goo00<007ooOol0Igoo00<007`0O0002g`000<007`0O0002W`000<007`0O000
+2W`000<007ooOol0OWoo0007Ool00`00Oomoo`1WOol00`00O01l000;O0000`00O01l000:O0000`00
+O01l000:O0000`00Oomoo`1nOol000Moo`03001oogoo06Moo`03001l07`000]l0003001l07`000Yl
+0003001l07`000Yl0003001oogoo07ioo`001goo00<007ooOol0Igoo00<007`0O0002g`000<007`0
+O0002W`000<007`0O0002W`000<007ooOol0OWoo0007Ool00`00Oomoo`1WOol00`00O01l000;O000
+0`00O01l000:O0000`00O01l000:O0000`00Oomoo`1nOol000Moo`03001oogoo06Moo`03001l07`0
+00]l0003001l07`000Yl0003001l07`000Yl0003001oogoo07ioo`001goo00<007ooOol0Igoo00<0
+07`0O0002g`000<007`0O0002W`000<007`0O0002W`000<007ooOol0OWoo0007Ool00`00Oomoo`1W
+Ool?000<O00>0020Ool000Moo`03001oogoo07Eoo`03001l07`000Yl0003001oogoo08]oo`001goo
+00<007ooOol0MGoo00<007`0O0002W`000<007ooOol0Rgoo0007Ool00`00Oomoo`1eOol00`00O01l
+000:O0000`00Oomoo`2;Ool000Moo`03001oogoo07Eoo`03001l07`000Yl0003001oogoo08]oo`00
+1goo00<007ooOol0MGoo00<007`0O0002W`000<007ooOol0Rgoo0007Ool00`00Oomoo`1eOol00`00
+O01l000:O0000`00Oomoo`2;Ool000Moo`03001oogoo07Eoo`03001l07`000Yl0003001oogoo08]o
+o`001goo00<007ooOol0MGoo00<007`0O0002W`000<007ooOol0Rgoo0007Ool00`00Oomoo`1eOol0
+0`00O01l000:O0000`00Oomoo`2;Ool000Moo`03001oogoo07Eoo`03001l07`000Yl0003001oogoo
+08]oo`001goo00<007ooOol0MGoo00<007`0O0002W`000<007ooOol0Rgoo0007Ool00`00Oomoo`1e
+Ool00`00O01l000:O0000`00Oomoo`2;Ool000Moo`03001oogoo07Eoo`03001l07`000Yl0003001o
+ogoo08]oo`001goo00<007ooOol0MGoo00<007`0O0002W`000<007ooOol0Rgoo0007Ool00`00Oomo
+o`1eOol>002=Ool000Moo`03001oogoo0?mooa5oo`001goo00<007ooOol0ogoo4Goo0007Ool00`00
+Oomoo`3oOolAOol000Moo`03001oogoo0?mooa5oo`00\
+\>"],
+  ImageRangeCache->{{{0, 281}, {173, 0}} -> {0, 0, 0, 0}}],
+
+Cell[OutputFormData["\<\
+Graphics[\"<<>>\"]\
+\>", "\<\
+-Graphics-\
+\>"], \
+"Output",
+  CellDingbat->None,
+  Evaluatable->False,
+  AspectRatioFixed->True]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Stats", "Section"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    RowBox[{
+      RowBox[{
+        RowBox[{"Stats", "[", 
+          RowBox[{
+            RowBox[{"BinomialDistribution", "[", 
+              RowBox[{"n", ",", "p"}], "]"}], ",", "x"}], "]"}], "//", 
+        "StatsForm"}], "//", "TraditionalForm"}]], "Input"],
+
+Cell[BoxData[
+    FormBox[
+      TagBox[
+        FormBox[
+          TagBox[GridBox[{
+                {"Domain", 
+                  TagBox[
+                    RowBox[{"Range", "[", 
+                      RowBox[{"0", ",", "n"}], "]"}],
+                    HoldForm]},
+                {
+                  RowBox[{"P", "(", "x", ")"}], 
+                  RowBox[{
+                    SuperscriptBox[
+                      RowBox[{"(", 
+                        RowBox[{"1", "-", "p"}], ")"}], 
+                      RowBox[{"n", "-", "x"}]], " ", 
+                    SuperscriptBox["p", "x"], " ", 
+                    TagBox[
+                      RowBox[{"(", GridBox[{
+                            {
+                              TagBox["n",
+                                Identity,
+                                Editable->True]},
+                            {
+                              TagBox["x",
+                                Identity,
+                                Editable->True]}
+                            }], ")"}],
+                      InterpretTemplate[ Binomial[ #, #2]&],
+                      Editable->False]}]},
+                {
+                  RowBox[{"D", "(", "x", ")"}], 
+                  RowBox[{
+                    SubscriptBox[
+                      InterpretationBox["I",
+                        BetaRegularized,
+                        Editable->False,
+                        Selectable->False], 
+                      RowBox[{"1", "-", "p"}]], "(", 
+                    RowBox[{
+                      RowBox[{"n", "-", 
+                        RowBox[{"\[LeftFloor]", "x", "\[RightFloor]"}]}], ",",
+                       
+                      RowBox[{
+                        RowBox[{"\[LeftFloor]", "x", "\[RightFloor]"}], "+", 
+                        "1"}]}], ")"}]},
+                {"\[Mu]", 
+                  RowBox[{"n", " ", "p"}]},
+                {
+                  SuperscriptBox["\[Sigma]", "2"], 
+                  RowBox[{"n", " ", 
+                    RowBox[{"(", 
+                      RowBox[{"1", "-", "p"}], ")"}], " ", "p"}]},
+                {
+                  SubscriptBox["\[Gamma]", "1"], 
+                  FractionBox[
+                    RowBox[{"1", "-", 
+                      RowBox[{"2", " ", "p"}]}], 
+                    SqrtBox[
+                      RowBox[{"n", " ", 
+                        RowBox[{"(", 
+                          RowBox[{"1", "-", "p"}], ")"}], " ", "p"}]]]},
+                {
+                  SubscriptBox["\[Gamma]", "2"], 
+                  FractionBox[
+                    RowBox[{"1", "-", 
+                      RowBox[{"6", " ", 
+                        RowBox[{"(", 
+                          RowBox[{"1", "-", "p"}], ")"}], " ", "p"}]}], 
+                    RowBox[{"n", " ", 
+                      RowBox[{"(", 
+                        RowBox[{"1", "-", "p"}], ")"}], " ", "p"}]]}
+                },
+              RowSpacings->1,
+              ColumnSpacings->3,
+              RowAlignments->Baseline,
+              ColumnAlignments->{Left}],
+            Function[ BoxForm`e$, 
+              TableForm[ BoxForm`e$]]],
+          "TraditionalForm"],
+        TraditionalForm,
+        Editable->True], TraditionalForm]], "Output"]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Mean Deviation", "Section"],
+
+Cell["Contributed by Michael Trott", "Text"],
+
+Cell[BoxData[
+    FormBox[
+      RowBox[{
+        RowBox[{
+          UnderoverscriptBox["\[Sum]", 
+            RowBox[{"r", "=", "0"}], "n"], 
+          RowBox[{
+            RowBox[{"\[LeftBracketingBar]", 
+              RowBox[{
+                RowBox[{"n", " ", "p"}], "-", "r"}], 
+              "\[RightBracketingBar]"}], " ", 
+            TagBox[
+              RowBox[{"(", GridBox[{
+                    {
+                      TagBox["n",
+                        Identity,
+                        Editable->True]},
+                    {
+                      TagBox["r",
+                        Identity,
+                        Editable->True]}
+                    }], ")"}],
+              InterpretTemplate[ Binomial[ #, #2]&],
+              Editable->False], " ", 
+            SuperscriptBox["p", "r"], " ", 
+            SuperscriptBox[
+              RowBox[{"(", 
+                RowBox[{"1", "-", "p"}], ")"}], 
+              RowBox[{"n", "-", "r"}]]}]}], "==", 
+        RowBox[{
+          RowBox[{"(", 
+            RowBox[{
+              SuperscriptBox[
+                RowBox[{"(", 
+                  RowBox[{"1", "-", "p"}], ")"}], 
+                RowBox[{
+                  RowBox[{"-", "m"}], "+", "n", "-", "2"}]], " ", 
+              SuperscriptBox["p", 
+                RowBox[{"m", "+", "1"}]], " ", 
+              RowBox[{"\[CapitalGamma]", "(", 
+                RowBox[{"n", "+", "1"}], ")"}], " ", 
+              RowBox[{"(", 
+                RowBox[{
+                  RowBox[{"2", " ", "p", " ", 
+                    RowBox[{"\[CapitalGamma]", "(", 
+                      RowBox[{"m", "+", "2"}], ")"}], " ", 
+                    RowBox[{"\[CapitalGamma]", "(", 
+                      RowBox[{"n", "-", "m"}], ")"}], " ", 
+                    TagBox[
+                      TagBox[
+                        RowBox[{
+                          RowBox[{
+                            SubscriptBox["\[InvisiblePrefixScriptBase]", 
+                              FormBox["2",
+                                "TraditionalForm"]], 
+                            SubscriptBox["F", 
+                              FormBox["1",
+                                "TraditionalForm"]]}], 
+                          "\[InvisibleApplication]", 
+                          RowBox[{"(", 
+                            RowBox[{
+                              TagBox[
+                                TagBox[
+                                  RowBox[{
+                                    TagBox["2",
+                                      Hypergeometric2F1,
+                                      Editable->True], ",", 
+                                    TagBox[
+                                      RowBox[{"m", "-", "n", "+", "2"}],
+                                      Hypergeometric2F1,
+                                      Editable->True]}],
+                                  InterpretTemplate[ {
+                                    SlotSequence[ 1]}&]],
+                                Hypergeometric2F1,
+                                Editable->False], ";", 
+                              TagBox[
+                                TagBox[
+                                  TagBox[
+                                    RowBox[{"m", "+", "3"}],
+                                    Hypergeometric2F1,
+                                    Editable->True],
+                                  InterpretTemplate[ {
+                                    SlotSequence[ 1]}&]],
+                                Hypergeometric2F1,
+                                Editable->False], ";", 
+                              TagBox[
+                                FractionBox["p", 
+                                  RowBox[{"p", "-", "1"}]],
+                                Hypergeometric2F1,
+                                Editable->True]}], ")"}]}],
+                        InterpretTemplate[ HypergeometricPFQ[ #, #2, #3]&],
+                        Editable->False],
+                      Hypergeometric2F1]}], "-", 
+                  RowBox[{"2", " ", 
+                    RowBox[{"(", 
+                      RowBox[{"p", "-", "1"}], ")"}], " ", 
+                    RowBox[{"(", 
+                      RowBox[{"m", "-", 
+                        RowBox[{"n", " ", "p"}], "+", "1"}], ")"}], " ", 
+                    RowBox[{"\[CapitalGamma]", "(", 
+                      RowBox[{"m", "+", "3"}], ")"}], " ", 
+                    RowBox[{"\[CapitalGamma]", "(", 
+                      RowBox[{
+                        RowBox[{"-", "m"}], "+", "n", "-", "1"}], ")"}], " ", 
+                    
+                    TagBox[
+                      TagBox[
+                        RowBox[{
+                          RowBox[{
+                            SubscriptBox["\[InvisiblePrefixScriptBase]", 
+                              FormBox["2",
+                                "TraditionalForm"]], 
+                            SubscriptBox["F", 
+                              FormBox["1",
+                                "TraditionalForm"]]}], 
+                          "\[InvisibleApplication]", 
+                          RowBox[{"(", 
+                            RowBox[{
+                              TagBox[
+                                TagBox[
+                                  RowBox[{
+                                    TagBox["1",
+                                      Hypergeometric2F1,
+                                      Editable->True], ",", 
+                                    TagBox[
+                                      RowBox[{"m", "-", "n", "+", "1"}],
+                                      Hypergeometric2F1,
+                                      Editable->True]}],
+                                  InterpretTemplate[ {
+                                    SlotSequence[ 1]}&]],
+                                Hypergeometric2F1,
+                                Editable->False], ";", 
+                              TagBox[
+                                TagBox[
+                                  TagBox[
+                                    RowBox[{"m", "+", "2"}],
+                                    Hypergeometric2F1,
+                                    Editable->True],
+                                  InterpretTemplate[ {
+                                    SlotSequence[ 1]}&]],
+                                Hypergeometric2F1,
+                                Editable->False], ";", 
+                              TagBox[
+                                FractionBox["p", 
+                                  RowBox[{"p", "-", "1"}]],
+                                Hypergeometric2F1,
+                                Editable->True]}], ")"}]}],
+                        InterpretTemplate[ HypergeometricPFQ[ #, #2, #3]&],
+                        Editable->False],
+                      Hypergeometric2F1]}]}], ")"}]}], ")"}], "/", 
+          RowBox[{"(", 
+            RowBox[{
+              RowBox[{"\[CapitalGamma]", "(", 
+                RowBox[{"m", "+", "2"}], ")"}], " ", 
+              RowBox[{"\[CapitalGamma]", "(", 
+                RowBox[{"m", "+", "3"}], ")"}], " ", 
+              RowBox[{"\[CapitalGamma]", "(", 
+                RowBox[{
+                  RowBox[{"-", "m"}], "+", "n", "-", "1"}], ")"}], " ", 
+              RowBox[{"\[CapitalGamma]", "(", 
+                RowBox[{"n", "-", "m"}], ")"}]}], ")"}]}]}], 
+      TraditionalForm]], "Input"],
+
+Cell[BoxData[
+    FormBox[
+      RowBox[{"m", "=", 
+        RowBox[{"\[LeftFloor]", 
+          RowBox[{"n", " ", "p"}], "\[RightFloor]"}]}], 
+      TraditionalForm]], "Input"],
+
+Cell[BoxData[
+    RowBox[{
+      RowBox[{"Sum", "[", 
+        RowBox[{
+          RowBox[{
+            RowBox[{"Abs", "[", 
+              RowBox[{
+                RowBox[{"n", " ", "p"}], "-", "r"}], "]"}], " ", 
+            RowBox[{"Binomial", "[", 
+              RowBox[{"n", ",", "r"}], "]"}], " ", 
+            RowBox[{"p", "^", "r"}], " ", 
+            RowBox[{
+              RowBox[{"(", 
+                RowBox[{"1", "-", "p"}], ")"}], "^", 
+              RowBox[{"(", 
+                RowBox[{"n", "-", "r"}], ")"}]}]}], ",", 
+          RowBox[{"{", 
+            RowBox[{"r", ",", "0", ",", "n"}], "}"}]}], "]"}], "\[Equal]", 
+      RowBox[{
+        RowBox[{"(", 
+          RowBox[{
+            RowBox[{
+              RowBox[{"(", 
+                RowBox[{"1", "-", "p"}], ")"}], "^", 
+              RowBox[{"(", 
+                RowBox[{
+                  RowBox[{"-", "2"}], "-", "m", "+", "n"}], ")"}]}], "*", 
+            RowBox[{"p", "^", 
+              RowBox[{"(", 
+                RowBox[{"1", "+", "m"}], ")"}]}], "*", 
+            RowBox[{"Gamma", "[", 
+              RowBox[{"1", "+", "n"}], "]"}], "*", 
+            RowBox[{"(", 
+              RowBox[{
+                RowBox[{
+                  RowBox[{"-", "2"}], "*", 
+                  RowBox[{"(", 
+                    RowBox[{
+                      RowBox[{"-", "1"}], "+", "p"}], ")"}], "*", 
+                  RowBox[{"(", 
+                    RowBox[{"1", "+", "m", "-", 
+                      RowBox[{"n", "*", "p"}]}], ")"}], "*", 
+                  RowBox[{"Gamma", "[", 
+                    RowBox[{"3", "+", "m"}], "]"}], "*", 
+                  RowBox[{"Gamma", "[", 
+                    RowBox[{
+                      RowBox[{"-", "1"}], "-", "m", "+", "n"}], "]"}], "*", 
+                  RowBox[{"Hypergeometric2F1", "[", 
+                    RowBox[{"1", ",", 
+                      RowBox[{"1", "+", "m", "-", "n"}], ",", 
+                      RowBox[{"2", "+", "m"}], ",", 
+                      RowBox[{"p", "/", 
+                        RowBox[{"(", 
+                          RowBox[{
+                            RowBox[{"-", "1"}], "+", "p"}], ")"}]}]}], 
+                    "]"}]}], "+", 
+                RowBox[{"2", "*", "p", "*", 
+                  RowBox[{"Gamma", "[", 
+                    RowBox[{"2", "+", "m"}], "]"}], "*", 
+                  RowBox[{"Gamma", "[", 
+                    RowBox[{
+                      RowBox[{"-", "m"}], "+", "n"}], "]"}], "*", 
+                  RowBox[{"Hypergeometric2F1", "[", 
+                    RowBox[{"2", ",", 
+                      RowBox[{"2", "+", "m", "-", "n"}], ",", 
+                      RowBox[{"3", "+", "m"}], ",", 
+                      RowBox[{"p", "/", 
+                        RowBox[{"(", 
+                          RowBox[{
+                            RowBox[{"-", "1"}], "+", "p"}], ")"}]}]}], 
+                    "]"}]}]}], ")"}]}], ")"}], "/", 
+        RowBox[{"(", 
+          RowBox[{
+            RowBox[{"Gamma", "[", 
+              RowBox[{"2", "+", "m"}], "]"}], "*", 
+            RowBox[{"Gamma", "[", 
+              RowBox[{"3", "+", "m"}], "]"}], "*", 
+            RowBox[{"Gamma", "[", 
+              RowBox[{
+                RowBox[{"-", "1"}], "-", "m", "+", "n"}], "]"}], "*", 
+            RowBox[{"Gamma", "[", 
+              RowBox[{
+                RowBox[{"-", "m"}], "+", "n"}], "]"}]}], ")"}]}]}]], "Input"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    RowBox[{
+      RowBox[{"FullSimplify", "[", 
+        RowBox[{
+          RowBox[{"Table", "[", 
+            RowBox[{
+              RowBox[{"Sum", "[", 
+                RowBox[{
+                  RowBox[{
+                    RowBox[{"Abs", "[", 
+                      RowBox[{
+                        RowBox[{"n", " ", "p"}], "-", "r"}], "]"}], " ", 
+                    RowBox[{"Binomial", "[", 
+                      RowBox[{"n", ",", "r"}], "]"}], " ", 
+                    RowBox[{"p", "^", "r"}], " ", 
+                    RowBox[{
+                      RowBox[{"(", 
+                        RowBox[{"1", "-", "p"}], ")"}], "^", 
+                      RowBox[{"(", 
+                        RowBox[{"n", "-", "r"}], ")"}]}]}], ",", 
+                  RowBox[{"{", 
+                    RowBox[{"r", ",", "0", ",", "n"}], "}"}]}], "]"}], ",", 
+              RowBox[{"{", 
+                RowBox[{"n", ",", "3"}], "}"}]}], "]"}], ",", 
+          RowBox[{"0", "\[LessEqual]", "p", "\[LessEqual]", "1"}]}], "]"}], "//",
+       "ColumnForm"}]], "Input"],
+
+Cell[BoxData[
+    InterpretationBox[GridBox[{
+          {
+            RowBox[{
+              RowBox[{"-", "2"}], " ", 
+              RowBox[{"(", 
+                RowBox[{
+                  RowBox[{"-", "1"}], "+", "p"}], ")"}], " ", "p"}]},
+          {
+            RowBox[{
+              RowBox[{"-", "2"}], " ", 
+              RowBox[{"(", 
+                RowBox[{
+                  RowBox[{"-", "1"}], "+", "p"}], ")"}], " ", "p", " ", 
+              RowBox[{"(", 
+                RowBox[{"1", "+", 
+                  RowBox[{"Abs", "[", 
+                    RowBox[{"1", "-", 
+                      RowBox[{"2", " ", "p"}]}], "]"}]}], ")"}]}]},
+          {
+            RowBox[{
+              RowBox[{"-", "3"}], " ", 
+              RowBox[{"(", 
+                RowBox[{
+                  RowBox[{"-", "1"}], "+", "p"}], ")"}], " ", "p", " ", 
+              RowBox[{"(", 
+                RowBox[{"1", "+", 
+                  RowBox[{"2", " ", 
+                    RowBox[{"(", 
+                      RowBox[{
+                        RowBox[{"-", "1"}], "+", "p"}], ")"}], " ", "p"}], 
+                  "-", 
+                  RowBox[{
+                    RowBox[{"(", 
+                      RowBox[{
+                        RowBox[{"-", "1"}], "+", "p"}], ")"}], " ", 
+                    RowBox[{"Abs", "[", 
+                      RowBox[{"1", "-", 
+                        RowBox[{"3", " ", "p"}]}], "]"}]}], "+", 
+                  RowBox[{"p", " ", 
+                    RowBox[{"Abs", "[", 
+                      RowBox[{"2", "-", 
+                        RowBox[{"3", " ", "p"}]}], "]"}]}]}], ")"}]}]}
+          },
+        GridBaseline->{Baseline, {1, 1}},
+        ColumnAlignments->{Left}],
+      ColumnForm[ {
+        Times[ -2, 
+          Plus[ -1, p], p], 
+        Times[ -2, 
+          Plus[ -1, p], p, 
+          Plus[ 1, 
+            Abs[ 
+              Plus[ 1, 
+                Times[ -2, p]]]]], 
+        Times[ -3, 
+          Plus[ -1, p], p, 
+          Plus[ 1, 
+            Times[ 2, 
+              Plus[ -1, p], p], 
+            Times[ -1, 
+              Plus[ -1, p], 
+              Abs[ 
+                Plus[ 1, 
+                  Times[ -3, p]]]], 
+            Times[ p, 
+              Abs[ 
+                Plus[ 2, 
+                  Times[ -3, p]]]]]]}],
+      Editable->False]], "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    RowBox[{"With", "[", 
+      RowBox[{
+        RowBox[{"{", 
+          RowBox[{"p", "=", 
+            RowBox[{"1", "/", "2"}]}], "}"}], ",", 
+        RowBox[{"Table", "[", 
+          RowBox[{
+            RowBox[{"Sum", "[", 
+              RowBox[{
+                RowBox[{
+                  RowBox[{"Abs", "[", 
+                    RowBox[{"k", "-", 
+                      RowBox[{"n", "/", "2"}]}], "]"}], 
+                  RowBox[{"Binomial", "[", 
+                    RowBox[{"n", ",", "k"}], "]"}], " ", 
+                  RowBox[{"p", "^", "n"}]}], ",", 
+                RowBox[{"{", 
+                  RowBox[{"k", ",", "0", ",", "n"}], "}"}]}], "]"}], ",", 
+            RowBox[{"{", 
+              RowBox[{"n", ",", "10"}], "}"}]}], "]"}]}], "]"}]], "Input"],
+
+Cell[BoxData[
+    RowBox[{"{", 
+      RowBox[{
+        FractionBox["1", "2"], ",", 
+        FractionBox["1", "2"], ",", 
+        FractionBox["3", "4"], ",", 
+        FractionBox["3", "4"], ",", 
+        FractionBox["15", "16"], ",", 
+        FractionBox["15", "16"], ",", 
+        FractionBox["35", "32"], ",", 
+        FractionBox["35", "32"], ",", 
+        FractionBox["315", "256"], ",", 
+        FractionBox["315", "256"]}], "}"}]], "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    RowBox[{"With", "[", 
+      RowBox[{
+        RowBox[{"{", 
+          RowBox[{"p", "=", 
+            RowBox[{"1", "/", "2"}]}], "}"}], ",", 
+        RowBox[{"Table", "[", 
+          RowBox[{
+            RowBox[{"Sum", "[", 
+              RowBox[{
+                RowBox[{
+                  RowBox[{"Abs", "[", 
+                    RowBox[{
+                      RowBox[{"n", " ", "p"}], "-", "r"}], "]"}], " ", 
+                  RowBox[{"Binomial", "[", 
+                    RowBox[{"n", ",", "r"}], "]"}], " ", 
+                  RowBox[{"p", "^", "r"}], " ", 
+                  RowBox[{
+                    RowBox[{"(", 
+                      RowBox[{"1", "-", "p"}], ")"}], "^", 
+                    RowBox[{"(", 
+                      RowBox[{"n", "-", "r"}], ")"}]}]}], ",", 
+                RowBox[{"{", 
+                  RowBox[{"r", ",", "0", ",", "n"}], "}"}]}], "]"}], ",", 
+            RowBox[{"{", 
+              RowBox[{"n", ",", "10"}], "}"}]}], "]"}]}], "]"}]], "Input"],
+
+Cell[BoxData[
+    RowBox[{"{", 
+      RowBox[{
+        FractionBox["1", "2"], ",", 
+        FractionBox["1", "2"], ",", 
+        FractionBox["3", "4"], ",", 
+        FractionBox["3", "4"], ",", 
+        FractionBox["15", "16"], ",", 
+        FractionBox["15", "16"], ",", 
+        FractionBox["35", "32"], ",", 
+        FractionBox["35", "32"], ",", 
+        FractionBox["315", "256"], ",", 
+        FractionBox["315", "256"]}], "}"}]], "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    RowBox[{"FullSimplify", "[", 
+      RowBox[{
+        RowBox[{
+          RowBox[{"(", 
+            RowBox[{
+              RowBox[{"Sum", "[", 
+                RowBox[{
+                  RowBox[{
+                    RowBox[{"Binomial", "[", 
+                      RowBox[{"n", ",", "k"}], "]"}], 
+                    RowBox[{"(", 
+                      RowBox[{"m", "-", "k"}], ")"}]}], ",", 
+                  RowBox[{"{", 
+                    RowBox[{"k", ",", "0", ",", 
+                      RowBox[{"m", "-", "1"}]}], "}"}]}], "]"}], "+", 
+              RowBox[{"Sum", "[", 
+                RowBox[{
+                  RowBox[{
+                    RowBox[{"Binomial", "[", 
+                      RowBox[{"n", ",", "k"}], "]"}], 
+                    RowBox[{"(", 
+                      RowBox[{"k", "-", "m"}], ")"}]}], ",", 
+                  RowBox[{"{", 
+                    RowBox[{"k", ",", 
+                      RowBox[{"m", "+", "1"}], ",", "n"}], "}"}]}], "]"}]}], 
+            ")"}], "/", 
+          RowBox[{"2", "^", "n"}]}], "/.", 
+        RowBox[{"m", "\[Rule]", 
+          RowBox[{"n", "/", "2"}]}]}], "]"}]], "Input"],
+
+Cell[BoxData[
+    RowBox[{
+      SuperscriptBox["2", 
+        RowBox[{"-", "n"}]], " ", 
+      RowBox[{"Gamma", "[", 
+        RowBox[{"1", "+", "n"}], "]"}], " ", 
+      RowBox[{"(", 
+        RowBox[{
+          FractionBox[
+            RowBox[{"2", "+", "n", "+", 
+              RowBox[{"4", " ", 
+                RowBox[{"Hypergeometric2F1", "[", 
+                  RowBox[{"1", ",", 
+                    RowBox[{"1", "-", 
+                      FractionBox["n", "2"]}], ",", 
+                    RowBox[{"2", "+", 
+                      FractionBox["n", "2"]}], ",", 
+                    RowBox[{"-", "1"}]}], "]"}]}]}], 
+            RowBox[{"n", " ", 
+              RowBox[{"(", 
+                RowBox[{"2", "+", "n"}], ")"}], " ", 
+              SuperscriptBox[
+                RowBox[{"Gamma", "[", 
+                  FractionBox["n", "2"], "]"}], "2"]}]], "+", 
+          FractionBox[
+            RowBox[{"Hypergeometric2F1Regularized", "[", 
+              RowBox[{"2", ",", 
+                RowBox[{"2", "-", 
+                  FractionBox["n", "2"]}], ",", 
+                RowBox[{"3", "+", 
+                  FractionBox["n", "2"]}], ",", 
+                RowBox[{"-", "1"}]}], "]"}], 
+            RowBox[{"Gamma", "[", 
+              RowBox[{
+                RowBox[{"-", "1"}], "+", 
+                FractionBox["n", "2"]}], "]"}]]}], ")"}]}]], "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    RowBox[{
+      RowBox[{"Table", "[", 
+        RowBox[{"%18", ",", 
+          RowBox[{"{", 
+            RowBox[{"n", ",", "2", ",", "10", ",", "2"}], "}"}]}], "]"}], "//",
+       "FullSimplify"}]], "Input"],
+
+Cell[BoxData[
+    RowBox[{"{", 
+      RowBox[{
+        FractionBox["1", "2"], ",", 
+        FractionBox["3", "4"], ",", 
+        FractionBox["15", "16"], ",", 
+        FractionBox["35", "32"], ",", 
+        FractionBox["315", "256"]}], "}"}]], "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    RowBox[{"FullSimplify", "[", 
+      RowBox[{
+        RowBox[{
+          RowBox[{"(", 
+            RowBox[{
+              RowBox[{"Sum", "[", 
+                RowBox[{
+                  RowBox[{
+                    RowBox[{"Binomial", "[", 
+                      RowBox[{"n", ",", "k"}], "]"}], 
+                    RowBox[{"(", 
+                      RowBox[{"m", "-", "k", "-", 
+                        RowBox[{"1", "/", "2"}]}], ")"}]}], ",", 
+                  RowBox[{"{", 
+                    RowBox[{"k", ",", "0", ",", "m"}], "}"}]}], "]"}], "+", 
+              RowBox[{"Sum", "[", 
+                RowBox[{
+                  RowBox[{
+                    RowBox[{"Binomial", "[", 
+                      RowBox[{"n", ",", "k"}], "]"}], 
+                    RowBox[{"(", 
+                      RowBox[{"k", "-", "m", "+", 
+                        RowBox[{"1", "/", "2"}]}], ")"}]}], ",", 
+                  RowBox[{"{", 
+                    RowBox[{"k", ",", 
+                      RowBox[{"m", "+", "1"}], ",", "n"}], "}"}]}], "]"}]}], 
+            ")"}], "/", 
+          RowBox[{"2", "^", "n"}]}], "/.", 
+        RowBox[{"m", "\[Rule]", 
+          RowBox[{
+            RowBox[{"(", 
+              RowBox[{"n", "-", "1"}], ")"}], "/", "2"}]}]}], "]"}]], "Input"],
+
+Cell[BoxData[
+    RowBox[{
+      FractionBox["1", "2"], "+", 
+      FractionBox[
+        RowBox[{
+          SuperscriptBox["2", 
+            RowBox[{"1", "-", "n"}]], " ", 
+          RowBox[{"Gamma", "[", 
+            RowBox[{"1", "+", "n"}], "]"}], " ", 
+          RowBox[{"Hypergeometric2F1Regularized", "[", 
+            RowBox[{"2", ",", 
+              FractionBox[
+                RowBox[{"3", "-", "n"}], "2"], ",", 
+              FractionBox[
+                RowBox[{"5", "+", "n"}], "2"], ",", 
+              RowBox[{"-", "1"}]}], "]"}]}], 
+        RowBox[{"Gamma", "[", 
+          RowBox[{
+            FractionBox["1", "2"], " ", 
+            RowBox[{"(", 
+              RowBox[{
+                RowBox[{"-", "1"}], "+", "n"}], ")"}]}], "]"}]]}]], "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    RowBox[{
+      RowBox[{"Table", "[", 
+        RowBox[{"%23", ",", 
+          RowBox[{"{", 
+            RowBox[{"n", ",", "1", ",", "15", ",", "2"}], "}"}]}], "]"}], "//",
+       "FullSimplify"}]], "Input"],
+
+Cell[BoxData[
+    RowBox[{"{", 
+      RowBox[{
+        FractionBox["1", "2"], ",", 
+        FractionBox["3", "4"], ",", 
+        FractionBox["15", "16"], ",", 
+        FractionBox["35", "32"], ",", 
+        FractionBox["315", "256"], ",", 
+        FractionBox["693", "512"], ",", 
+        FractionBox["3003", "2048"], ",", 
+        FractionBox["6435", "4096"]}], "}"}]], "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    RowBox[{"Table", "[", 
+      RowBox[{
+        RowBox[{"If", "[", 
+          RowBox[{
+            RowBox[{"OddQ", "[", "n", "]"}], ",", 
+            RowBox[{
+              RowBox[{
+                RowBox[{"n", "!!"}], "/", "2"}], "/", 
+              RowBox[{
+                RowBox[{"(", 
+                  RowBox[{"n", "-", "1"}], ")"}], "!!"}]}], ",", 
+            RowBox[{
+              RowBox[{
+                RowBox[{
+                  RowBox[{"(", 
+                    RowBox[{"n", "-", "1"}], ")"}], "!!"}], "/", "2"}], "/", 
+              RowBox[{
+                RowBox[{"(", 
+                  RowBox[{"n", "-", "2"}], ")"}], "!!"}]}]}], "]"}], ",", 
+        RowBox[{"{", 
+          RowBox[{"n", ",", "15"}], "}"}]}], "]"}]], "Input"],
+
+Cell[BoxData[
+    RowBox[{"{", 
+      RowBox[{
+        FractionBox["1", "2"], ",", 
+        FractionBox["1", "2"], ",", 
+        FractionBox["3", "4"], ",", 
+        FractionBox["3", "4"], ",", 
+        FractionBox["15", "16"], ",", 
+        FractionBox["15", "16"], ",", 
+        FractionBox["35", "32"], ",", 
+        FractionBox["35", "32"], ",", 
+        FractionBox["315", "256"], ",", 
+        FractionBox["315", "256"], ",", 
+        FractionBox["693", "512"], ",", 
+        FractionBox["693", "512"], ",", 
+        FractionBox["3003", "2048"], ",", 
+        FractionBox["3003", "2048"], ",", 
+        FractionBox["6435", "4096"]}], "}"}]], "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    RowBox[{"Table", "[", 
+      RowBox[{
+        RowBox[{"With", "[", 
+          RowBox[{
+            RowBox[{"{", 
+              RowBox[{"p", "=", 
+                RowBox[{"1", "/", "2"}]}], "}"}], ",", "\[IndentingNewLine]", 
+            
+            RowBox[{
+              RowBox[{"m", "=", 
+                RowBox[{"Floor", "[", 
+                  RowBox[{"n", " ", "p"}], "]"}]}], ";", 
+              RowBox[{
+                RowBox[{"(", 
+                  RowBox[{
+                    RowBox[{
+                      RowBox[{"(", 
+                        RowBox[{"1", "-", "p"}], ")"}], "^", 
+                      RowBox[{"(", 
+                        RowBox[{
+                          RowBox[{"-", "2"}], "-", "m", "+", "n"}], ")"}]}], 
+                    "*", 
+                    RowBox[{"p", "^", 
+                      RowBox[{"(", 
+                        RowBox[{"1", "+", "m"}], ")"}]}], "*", 
+                    RowBox[{"Gamma", "[", 
+                      RowBox[{"1", "+", "n"}], "]"}], "*", 
+                    RowBox[{"(", 
+                      RowBox[{
+                        RowBox[{
+                          RowBox[{"-", "2"}], "*", 
+                          RowBox[{"(", 
+                            RowBox[{
+                              RowBox[{"-", "1"}], "+", "p"}], ")"}], "*", 
+                          RowBox[{"(", 
+                            RowBox[{"1", "+", "m", "-", 
+                              RowBox[{"n", "*", "p"}]}], ")"}], "*", 
+                          RowBox[{"Gamma", "[", 
+                            RowBox[{"3", "+", "m"}], "]"}], "*", 
+                          RowBox[{"Gamma", "[", 
+                            RowBox[{
+                              RowBox[{"-", "1"}], "-", "m", "+", "n"}], "]"}],
+                           "*", 
+                          RowBox[{"Hypergeometric2F1", "[", 
+                            RowBox[{"1", ",", 
+                              RowBox[{"1", "+", "m", "-", "n"}], ",", 
+                              RowBox[{"2", "+", "m"}], ",", 
+                              RowBox[{"p", "/", 
+                                RowBox[{"(", 
+                                  RowBox[{
+                                    RowBox[{"-", "1"}], "+", "p"}], ")"}]}]}],
+                             "]"}]}], "+", 
+                        RowBox[{"2", "*", "p", "*", 
+                          RowBox[{"Gamma", "[", 
+                            RowBox[{"2", "+", "m"}], "]"}], "*", 
+                          RowBox[{"Gamma", "[", 
+                            RowBox[{
+                              RowBox[{"-", "m"}], "+", "n"}], "]"}], "*", 
+                          RowBox[{"Hypergeometric2F1", "[", 
+                            RowBox[{"2", ",", 
+                              RowBox[{"2", "+", "m", "-", "n"}], ",", 
+                              RowBox[{"3", "+", "m"}], ",", 
+                              RowBox[{"p", "/", 
+                                RowBox[{"(", 
+                                  RowBox[{
+                                    RowBox[{"-", "1"}], "+", "p"}], ")"}]}]}],
+                             "]"}]}]}], ")"}]}], ")"}], "/", 
+                RowBox[{"(", 
+                  RowBox[{
+                    RowBox[{"Gamma", "[", 
+                      RowBox[{"2", "+", "m"}], "]"}], "*", 
+                    RowBox[{"Gamma", "[", 
+                      RowBox[{"3", "+", "m"}], "]"}], "*", 
+                    RowBox[{"Gamma", "[", 
+                      RowBox[{
+                        RowBox[{"-", "1"}], "-", "m", "+", "n"}], "]"}], "*", 
+                    
+                    RowBox[{"Gamma", "[", 
+                      RowBox[{
+                        RowBox[{"-", "m"}], "+", "n"}], "]"}]}], ")"}]}]}]}], 
+          "]"}], ",", "\[IndentingNewLine]", 
+        RowBox[{"{", 
+          RowBox[{"n", ",", "10"}], "}"}]}], "]"}]], "Input"],
+
+Cell[BoxData[
+    RowBox[{
+      RowBox[{"\[Infinity]", "::", "\<\"indet\"\>"}], 
+      RowBox[{
+      ":", " "}], "\<\"Indeterminate expression \\!\\(0\\\\ \
+ComplexInfinity\\) encountered. \\!\\(\\*ButtonBox[\\\"More\[Ellipsis]\\\", \
+ButtonStyle->\\\"RefGuideLinkText\\\", ButtonFrame->None, \
+ButtonData:>\\\"General::indet\\\"]\\)\"\>"}]], "Message"],
+
+Cell[BoxData[
+    RowBox[{
+      RowBox[{"\[Infinity]", "::", "\<\"indet\"\>"}], 
+      RowBox[{
+      ":", " "}], "\<\"Indeterminate expression \\!\\(0\\\\ \
+ComplexInfinity\\) encountered. \\!\\(\\*ButtonBox[\\\"More\[Ellipsis]\\\", \
+ButtonStyle->\\\"RefGuideLinkText\\\", ButtonFrame->None, \
+ButtonData:>\\\"General::indet\\\"]\\)\"\>"}]], "Message"],
+
+Cell[BoxData[
+    RowBox[{"{", 
+      RowBox[{"Indeterminate", ",", "Indeterminate", ",", 
+        FractionBox["3", "4"], ",", 
+        FractionBox["3", "4"], ",", 
+        FractionBox["15", "16"], ",", 
+        FractionBox["15", "16"], ",", 
+        FractionBox["35", "32"], ",", 
+        FractionBox["35", "32"], ",", 
+        FractionBox["315", "256"], ",", 
+        FractionBox["315", "256"]}], "}"}]], "Output"]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Moments", "Section"],
+
+Cell[CellGroupData[{
+
+Cell["\<\
+M=Sum[Exp[t x]Binomial[x+r-1,r-1] p^r (1-p)^x,{x,0,Infinity}]\
+\>", \
+"Input",
+  CellDingbat->None,
+  AspectRatioFixed->True],
+
+Cell[BoxData[
+    RowBox[{
+      SuperscriptBox["p", "r"], " ", 
+      SuperscriptBox[
+        RowBox[{"(", 
+          RowBox[{"1", "-", 
+            SuperscriptBox["\[ExponentialE]", "t"], "+", 
+            RowBox[{
+              SuperscriptBox["\[ExponentialE]", "t"], " ", "p"}]}], ")"}], 
+        RowBox[{"-", "r"}]]}]], "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Simplify[Table[D[M,{t,i}],{i,1,4}]]", "Input",
+  CellDingbat->None,
+  AspectRatioFixed->True],
+
+Cell[BoxData[
+    RowBox[{"{", 
+      RowBox[{
+        RowBox[{
+          RowBox[{"-", 
+            SuperscriptBox["\[ExponentialE]", "t"]}], " ", 
+          SuperscriptBox[
+            RowBox[{"(", 
+              RowBox[{"1", "+", 
+                RowBox[{
+                  SuperscriptBox["\[ExponentialE]", "t"], " ", 
+                  RowBox[{"(", 
+                    RowBox[{
+                      RowBox[{"-", "1"}], "+", "p"}], ")"}]}]}], ")"}], 
+            RowBox[{
+              RowBox[{"-", "1"}], "-", "r"}]], " ", 
+          RowBox[{"(", 
+            RowBox[{
+              RowBox[{"-", "1"}], "+", "p"}], ")"}], " ", 
+          SuperscriptBox["p", "r"], " ", "r"}], ",", 
+        RowBox[{
+          SuperscriptBox["\[ExponentialE]", "t"], " ", 
+          SuperscriptBox[
+            RowBox[{"(", 
+              RowBox[{"1", "+", 
+                RowBox[{
+                  SuperscriptBox["\[ExponentialE]", "t"], " ", 
+                  RowBox[{"(", 
+                    RowBox[{
+                      RowBox[{"-", "1"}], "+", "p"}], ")"}]}]}], ")"}], 
+            RowBox[{
+              RowBox[{"-", "2"}], "-", "r"}]], " ", 
+          RowBox[{"(", 
+            RowBox[{
+              RowBox[{"-", "1"}], "+", "p"}], ")"}], " ", 
+          SuperscriptBox["p", "r"], " ", "r", " ", 
+          RowBox[{"(", 
+            RowBox[{
+              RowBox[{"-", "1"}], "+", 
+              RowBox[{
+                SuperscriptBox["\[ExponentialE]", "t"], " ", 
+                RowBox[{"(", 
+                  RowBox[{
+                    RowBox[{"-", "1"}], "+", "p"}], ")"}], " ", "r"}]}], 
+            ")"}]}], ",", 
+        RowBox[{
+          RowBox[{"-", 
+            SuperscriptBox["\[ExponentialE]", "t"]}], " ", 
+          SuperscriptBox[
+            RowBox[{"(", 
+              RowBox[{"1", "+", 
+                RowBox[{
+                  SuperscriptBox["\[ExponentialE]", "t"], " ", 
+                  RowBox[{"(", 
+                    RowBox[{
+                      RowBox[{"-", "1"}], "+", "p"}], ")"}]}]}], ")"}], 
+            RowBox[{
+              RowBox[{"-", "3"}], "-", "r"}]], " ", 
+          RowBox[{"(", 
+            RowBox[{
+              RowBox[{"-", "1"}], "+", "p"}], ")"}], " ", 
+          SuperscriptBox["p", "r"], " ", "r", " ", 
+          RowBox[{"(", 
+            RowBox[{"1", "+", 
+              RowBox[{
+                SuperscriptBox["\[ExponentialE]", 
+                  RowBox[{"2", " ", "t"}]], " ", 
+                SuperscriptBox[
+                  RowBox[{"(", 
+                    RowBox[{
+                      RowBox[{"-", "1"}], "+", "p"}], ")"}], "2"], " ", 
+                SuperscriptBox["r", "2"]}], "-", 
+              RowBox[{
+                SuperscriptBox["\[ExponentialE]", "t"], " ", 
+                RowBox[{"(", 
+                  RowBox[{
+                    RowBox[{"-", "1"}], "+", "p"}], ")"}], " ", 
+                RowBox[{"(", 
+                  RowBox[{"1", "+", 
+                    RowBox[{"3", " ", "r"}]}], ")"}]}]}], ")"}]}], ",", 
+        RowBox[{
+          SuperscriptBox["\[ExponentialE]", "t"], " ", 
+          SuperscriptBox[
+            RowBox[{"(", 
+              RowBox[{"1", "+", 
+                RowBox[{
+                  SuperscriptBox["\[ExponentialE]", "t"], " ", 
+                  RowBox[{"(", 
+                    RowBox[{
+                      RowBox[{"-", "1"}], "+", "p"}], ")"}]}]}], ")"}], 
+            RowBox[{
+              RowBox[{"-", "4"}], "-", "r"}]], " ", 
+          RowBox[{"(", 
+            RowBox[{
+              RowBox[{"-", "1"}], "+", "p"}], ")"}], " ", 
+          SuperscriptBox["p", "r"], " ", "r", " ", 
+          RowBox[{"(", 
+            RowBox[{
+              RowBox[{"-", "1"}], "+", 
+              RowBox[{
+                SuperscriptBox["\[ExponentialE]", 
+                  RowBox[{"3", " ", "t"}]], " ", 
+                SuperscriptBox[
+                  RowBox[{"(", 
+                    RowBox[{
+                      RowBox[{"-", "1"}], "+", "p"}], ")"}], "3"], " ", 
+                SuperscriptBox["r", "3"]}], "+", 
+              RowBox[{
+                SuperscriptBox["\[ExponentialE]", "t"], " ", 
+                RowBox[{"(", 
+                  RowBox[{
+                    RowBox[{"-", "1"}], "+", "p"}], ")"}], " ", 
+                RowBox[{"(", 
+                  RowBox[{"4", "+", 
+                    RowBox[{"7", " ", "r"}]}], ")"}]}], "-", 
+              RowBox[{
+                SuperscriptBox["\[ExponentialE]", 
+                  RowBox[{"2", " ", "t"}]], " ", 
+                SuperscriptBox[
+                  RowBox[{"(", 
+                    RowBox[{
+                      RowBox[{"-", "1"}], "+", "p"}], ")"}], "2"], " ", 
+                RowBox[{"(", 
+                  RowBox[{"1", "+", 
+                    RowBox[{"4", " ", "r"}], "+", 
+                    RowBox[{"6", " ", 
+                      SuperscriptBox["r", "2"]}]}], ")"}]}]}], ")"}]}]}], 
+      "}"}]], "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    RowBox[{
+      RowBox[{"Evaluate", "[", 
+        RowBox[{"Table", "[", 
+          RowBox[{
+            SubscriptBox[
+              OverscriptBox["\[Mu]", "\[Prime]"], "i"], ",", 
+            RowBox[{"{", 
+              RowBox[{"i", ",", "4"}], "}"}]}], "]"}], "]"}], "=", 
+      RowBox[{"Simplify", "[", 
+        RowBox[{"%", "/.", 
+          RowBox[{"t", "->", "0"}]}], "]"}]}]], "Input"],
+
+Cell[BoxData[
+    RowBox[{"{", 
+      RowBox[{
+        RowBox[{
+          RowBox[{"(", 
+            RowBox[{
+              RowBox[{"-", "1"}], "+", 
+              FractionBox["1", "p"]}], ")"}], " ", "r"}], ",", 
+        FractionBox[
+          RowBox[{
+            RowBox[{"(", 
+              RowBox[{
+                RowBox[{"-", "1"}], "+", "p"}], ")"}], " ", "r", " ", 
+            RowBox[{"(", 
+              RowBox[{
+                RowBox[{"-", "1"}], "+", 
+                RowBox[{
+                  RowBox[{"(", 
+                    RowBox[{
+                      RowBox[{"-", "1"}], "+", "p"}], ")"}], " ", "r"}]}], 
+              ")"}]}], 
+          SuperscriptBox["p", "2"]], ",", 
+        RowBox[{"-", 
+          FractionBox[
+            RowBox[{
+              RowBox[{"(", 
+                RowBox[{
+                  RowBox[{"-", "1"}], "+", "p"}], ")"}], " ", "r", " ", 
+              RowBox[{"(", 
+                RowBox[{"1", "+", 
+                  RowBox[{
+                    SuperscriptBox[
+                      RowBox[{"(", 
+                        RowBox[{
+                          RowBox[{"-", "1"}], "+", "p"}], ")"}], "2"], " ", 
+                    SuperscriptBox["r", "2"]}], "-", 
+                  RowBox[{
+                    RowBox[{"(", 
+                      RowBox[{
+                        RowBox[{"-", "1"}], "+", "p"}], ")"}], " ", 
+                    RowBox[{"(", 
+                      RowBox[{"1", "+", 
+                        RowBox[{"3", " ", "r"}]}], ")"}]}]}], ")"}]}], 
+            SuperscriptBox["p", "3"]]}], ",", 
+        RowBox[{
+          FractionBox["1", 
+            SuperscriptBox["p", "4"]], 
+          RowBox[{"(", 
+            RowBox[{
+              RowBox[{"(", 
+                RowBox[{
+                  RowBox[{"-", "1"}], "+", "p"}], ")"}], " ", "r", " ", 
+              RowBox[{"(", 
+                RowBox[{
+                  RowBox[{"-", "1"}], "+", 
+                  RowBox[{
+                    SuperscriptBox[
+                      RowBox[{"(", 
+                        RowBox[{
+                          RowBox[{"-", "1"}], "+", "p"}], ")"}], "3"], " ", 
+                    SuperscriptBox["r", "3"]}], "+", 
+                  RowBox[{
+                    RowBox[{"(", 
+                      RowBox[{
+                        RowBox[{"-", "1"}], "+", "p"}], ")"}], " ", 
+                    RowBox[{"(", 
+                      RowBox[{"4", "+", 
+                        RowBox[{"7", " ", "r"}]}], ")"}]}], "-", 
+                  RowBox[{
+                    SuperscriptBox[
+                      RowBox[{"(", 
+                        RowBox[{
+                          RowBox[{"-", "1"}], "+", "p"}], ")"}], "2"], " ", 
+                    RowBox[{"(", 
+                      RowBox[{"1", "+", 
+                        RowBox[{"4", " ", "r"}], "+", 
+                        RowBox[{"6", " ", 
+                          SuperscriptBox["r", "2"]}]}], ")"}]}]}], ")"}]}], 
+            ")"}]}]}], "}"}]], "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    RowBox[{"FullSimplify", "[", 
+      RowBox[{"Table", "[", 
+        RowBox[{
+          RowBox[{
+            SubscriptBox["\[Mu]", "i"], "/.", " ", 
+            RowBox[{"CentralToRaw", "[", "i", "]"}]}], ",", 
+          RowBox[{"{", 
+            RowBox[{"i", ",", "4"}], "}"}]}], "]"}], "]"}]], "Input"],
+
+Cell[BoxData[
+    RowBox[{"{", 
+      RowBox[{"0", ",", 
+        FractionBox[
+          RowBox[{"r", "-", 
+            RowBox[{"p", " ", "r"}]}], 
+          SuperscriptBox["p", "2"]], ",", 
+        FractionBox[
+          RowBox[{
+            RowBox[{"(", 
+              RowBox[{
+                RowBox[{"-", "2"}], "+", "p"}], ")"}], " ", 
+            RowBox[{"(", 
+              RowBox[{
+                RowBox[{"-", "1"}], "+", "p"}], ")"}], " ", "r"}], 
+          SuperscriptBox["p", "3"]], ",", 
+        RowBox[{"-", 
+          FractionBox[
+            RowBox[{
+              RowBox[{"(", 
+                RowBox[{
+                  RowBox[{"-", "1"}], "+", "p"}], ")"}], " ", "r", " ", 
+              RowBox[{"(", 
+                RowBox[{
+                  SuperscriptBox["p", "2"], "+", 
+                  RowBox[{"3", " ", 
+                    RowBox[{"(", 
+                      RowBox[{"2", "+", "r"}], ")"}]}], "-", 
+                  RowBox[{"3", " ", "p", " ", 
+                    RowBox[{"(", 
+                      RowBox[{"2", "+", "r"}], ")"}]}]}], ")"}]}], 
+            SuperscriptBox["p", "4"]]}]}], "}"}]], "Output"]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Steinhaus's Problem (p. 25)", "Section"],
+
+Cell[BoxData[{
+    RowBox[{
+      RowBox[{
+        RowBox[{"P", "[", 
+          RowBox[{"n_", ",", "N_", ",", "p_"}], "]"}], ":=", 
+        RowBox[{
+          RowBox[{"Binomial", "[", 
+            RowBox[{"N", ",", "n"}], "]"}], 
+          RowBox[{"p", "^", "n"}], 
+          RowBox[{
+            RowBox[{"(", 
+              RowBox[{"1", "-", "p"}], ")"}], "^", 
+            RowBox[{"(", 
+              RowBox[{"N", "-", "n"}], ")"}]}]}]}], ";"}], "\n", 
+    RowBox[{
+      RowBox[{
+        RowBox[{"S", "[", 
+          RowBox[{"i_", ",", "NN_", ",", "s_"}], "]"}], ":=", 
+        RowBox[{"s", " ", 
+          RowBox[{"P", "[", 
+            RowBox[{"i", ",", "NN", ",", 
+              RowBox[{"1", "/", "s"}]}], "]"}]}]}], ";"}]}], "Input"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    RowBox[{"Table", "[", 
+      RowBox[{
+        RowBox[{"{", 
+          RowBox[{"i", ",", 
+            RowBox[{
+              RowBox[{"S", "[", 
+                RowBox[{"i", ",", "64", ",", "64"}], "]"}], "//", "N"}]}], 
+          "}"}], ",", 
+        RowBox[{"{", 
+          RowBox[{"i", ",", "0", ",", "10"}], "}"}]}], "]"}]], "Input"],
+
+Cell[BoxData[
+    RowBox[{"{", 
+      RowBox[{
+        RowBox[{"{", 
+          RowBox[{"0", ",", "23.3591375516100763`"}], "}"}], ",", 
+        RowBox[{"{", 
+          RowBox[{"1", ",", "23.7299175127467432`"}], "}"}], ",", 
+        RowBox[{"{", 
+          RowBox[{"2", ",", "11.8649587563733716`"}], "}"}], ",", 
+        RowBox[{"{", 
+          RowBox[{"3", ",", "3.89220869256692623`"}], "}"}], ",", 
+        RowBox[{"{", 
+          RowBox[{"4", ",", "0.942161627962628855`"}], "}"}], ",", 
+        RowBox[{"{", 
+          RowBox[{"5", ",", "0.179459357707167432`"}], "}"}], ",", 
+        RowBox[{"{", 
+          RowBox[{"6", ",", "0.0280108521288965039`"}], "}"}], ",", 
+        RowBox[{"{", 
+          RowBox[{"7", ",", "0.00368396694665759039`"}], "}"}], ",", 
+        RowBox[{"{", 
+          RowBox[{"8", ",", "0.000416639118967227339`"}], "}"}], ",", 
+        RowBox[{"{", 
+          RowBox[{"9", ",", "0.0000411495426140471565`"}], "}"}], ",", 
+        RowBox[{"{", 
+          RowBox[{"10", ",", "3.59242038694062415`*^-6"}], "}"}]}], 
+      "}"}]], "Output"]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["OEIS", "Section"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    RowBox[{"<<", "Utilities`EISFormat`"}]], "Input"],
+
+Cell[BoxData["\<\"EISFormat.m version 1.07 by Olivier Gerard and Eric W. \
+Weisstein\"\>"], "Print"],
+
+Cell[BoxData["\<\"e-mail FormatSequence to njas@research.att.com\"\>"], \
+"Print"],
+
+Cell[BoxData["\<\"e-mail LookupFormat   to sequences@research.att.com\"\>"], \
+"Print"],
+
+Cell[BoxData["\<\"                      or superseeker@research.att.com \
+(single line only)\"\>"], "Print"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    RowBox[{"FormatSequence", "[", 
+      RowBox[{
+        RowBox[{"Numerator", "[", 
+          RowBox[{"Table", "[", 
+            RowBox[{
+              RowBox[{"If", "[", 
+                RowBox[{
+                  RowBox[{"OddQ", "[", "n", "]"}], ",", 
+                  RowBox[{
+                    RowBox[{
+                      RowBox[{"n", "!!"}], "/", "2"}], "/", 
+                    RowBox[{
+                      RowBox[{"(", 
+                        RowBox[{"n", "-", "1"}], ")"}], "!!"}]}], ",", 
+                  RowBox[{
+                    RowBox[{
+                      RowBox[{
+                        RowBox[{"(", 
+                          RowBox[{"n", "-", "1"}], ")"}], "!!"}], "/", "2"}], 
+                    "/", 
+                    RowBox[{
+                      RowBox[{"(", 
+                        RowBox[{"n", "-", "2"}], ")"}], "!!"}]}]}], "]"}], 
+              ",", 
+              RowBox[{"{", 
+                RowBox[{"n", ",", "50"}], "}"}]}], "]"}], "]"}], ",", 
+        "\[IndentingNewLine]", "86116", ",", "1", ",", "\[IndentingNewLine]", 
+        
+        RowBox[{
+        "Name", "->", 
+          "\"\<Numerators of mean deviations of a symmetrical binomial \
+distribution on n elements.\>\""}], ",", "\[IndentingNewLine]", 
+        RowBox[{"Cross", "\[Rule]", 
+          RowBox[{"{", 
+            RowBox[{"001803", ",", "86117"}], "}"}]}], ",", 
+        "\[IndentingNewLine]", 
+        RowBox[{"html", "[", "\"\<Binomial Distribution\>\"", "]"}], ",", 
+        "\[IndentingNewLine]", 
+        RowBox[{"Keyw", "\[Rule]", 
+          RowBox[{"{", 
+            RowBox[{"\"\<frac\>\"", ",", "\"\<new\>\""}], "}"}]}], ",", 
+        "\[IndentingNewLine]", 
+        RowBox[{
+        "Mma", "->", 
+          "\"\<Numerator[Table[If[OddQ[n],n!!/2/(n-1)!!,(n-1)!!/2/(n-2)!!],{n,\
+50}]]\>\""}]}], "\[IndentingNewLine]", "]"}]], "Input"],
+
+Cell[BoxData[
+    RowBox[{
+      RowBox[{"FormatSequence", "::", "\<\"HeyYou\"\>"}], 
+      RowBox[{
+      ":", " "}], "\<\"My respects to you, Master \
+\\!\\(\\\"Eric\\\"\\).\"\>"}]], "Message"],
+
+Cell["\<\
+%I A086116 
+%S A086116 1,1,3,3,15,15,35,35,315,315,693,693,3003,3003,6435,6435,109395,
+%T A086116 \
+109395,230945,230945,969969,969969,2028117,2028117,16900975,16900975,
+%U A086116 \
+35102025,35102025,145422675,145422675,300540195,300540195,9917826435
+%N A086116 Numerators of mean deviations of a symmetrical binomial \
+distribution on n elements.
+%H A086116 Eric Weisstein's World of Mathematics, <a \
+href=\"http://mathworld.wolfram.com/BinomialDistribution.html\">Binomial \
+Distribution</a>
+%Y A086116 Cf. A001803,A086117.
+%A A086116 Eric W. Weisstein (eric(AT)weisstein.com), Jul 10, 2003
+%O A086116 1,3
+%t A086116 \
+Numerator[Table[If[OddQ[n],n!!/2/(n-1)!!,(n-1)!!/2/(n-2)!!],{n,50}]]
+%K A086116 nonn,frac,new\
+\>", "Print"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    RowBox[{"FormatSequence", "[", 
+      RowBox[{
+        RowBox[{"Denominator", "[", 
+          RowBox[{"Table", "[", 
+            RowBox[{
+              RowBox[{"If", "[", 
+                RowBox[{
+                  RowBox[{"OddQ", "[", "n", "]"}], ",", 
+                  RowBox[{
+                    RowBox[{
+                      RowBox[{"n", "!!"}], "/", "2"}], "/", 
+                    RowBox[{
+                      RowBox[{"(", 
+                        RowBox[{"n", "-", "1"}], ")"}], "!!"}]}], ",", 
+                  RowBox[{
+                    RowBox[{
+                      RowBox[{
+                        RowBox[{"(", 
+                          RowBox[{"n", "-", "1"}], ")"}], "!!"}], "/", "2"}], 
+                    "/", 
+                    RowBox[{
+                      RowBox[{"(", 
+                        RowBox[{"n", "-", "2"}], ")"}], "!!"}]}]}], "]"}], 
+              ",", 
+              RowBox[{"{", 
+                RowBox[{"n", ",", "50"}], "}"}]}], "]"}], "]"}], ",", 
+        "\[IndentingNewLine]", "86117", ",", "1", ",", "\[IndentingNewLine]", 
+        
+        RowBox[{
+        "Name", "->", 
+          "\"\<Denominators of mean deviations of a symmetrical binomial \
+distribution on n elements.\>\""}], ",", "\[IndentingNewLine]", 
+        RowBox[{"Cross", "\[Rule]", 
+          RowBox[{"{", "86116", "}"}]}], ",", "\[IndentingNewLine]", 
+        RowBox[{"html", "[", "\"\<Binomial Distribution\>\"", "]"}], ",", 
+        "\[IndentingNewLine]", 
+        RowBox[{"Keyw", "\[Rule]", 
+          RowBox[{"{", 
+            RowBox[{"\"\<frac\>\"", ",", "\"\<new\>\""}], "}"}]}], ",", 
+        "\[IndentingNewLine]", 
+        RowBox[{
+        "Mma", "->", 
+          "\"\<Denominator[Table[If[OddQ[n],n!!/2/(n-1)!!,(n-1)!!/2/(n-2)!!],{\
+n,50}]]\>\""}]}], "\[IndentingNewLine]", "]"}]], "Input"],
+
+Cell[BoxData[
+    RowBox[{
+      RowBox[{"FormatSequence", "::", "\<\"HeyYou\"\>"}], 
+      RowBox[{
+      ":", " "}], "\<\"My respects to you, Master \
+\\!\\(\\\"Eric\\\"\\).\"\>"}]], "Message"],
+
+Cell["\<\
+%I A086117 
+%S A086117 \
+2,2,4,4,16,16,32,32,256,256,512,512,2048,2048,4096,4096,65536,65536,
+%T A086117 \
+131072,131072,524288,524288,1048576,1048576,8388608,8388608,16777216,
+%U A086117 \
+16777216,67108864,67108864,134217728,134217728,4294967296,4294967296
+%N A086117 Denominators of mean deviations of a symmetrical binomial \
+distribution on n elements.
+%H A086117 Eric Weisstein's World of Mathematics, <a \
+href=\"http://mathworld.wolfram.com/BinomialDistribution.html\">Binomial \
+Distribution</a>
+%Y A086117 Cf. A086116.
+%A A086117 Eric W. Weisstein (eric(AT)weisstein.com), Jul 10, 2003
+%O A086117 1,1
+%t A086117 \
+Denominator[Table[If[OddQ[n],n!!/2/(n-1)!!,(n-1)!!/2/(n-2)!!],{n,50}]]
+%K A086117 nonn,frac,new\
+\>", "Print"]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]]
+},
+FrontEndVersion->"5.2 for Macintosh",
+ScreenRectangle->{{0, 1440}, {0, 837}},
+WindowSize->{760, 727},
+WindowMargins->{{318, Automatic}, {27, Automatic}},
+StyleDefinitions -> "Default.nb"
+]
+
+(*******************************************************************
+Cached data follows.  If you edit this Notebook file directly, not
+using Mathematica, you must remove the line containing CacheID at
+the top of  the file.  The cache data will then be recreated when
+you save this file from within Mathematica.
+*******************************************************************)
+
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+
+(*NotebookFileOutline
+Notebook[{
+
+Cell[CellGroupData[{
+Cell[1776, 53, 38, 0, 88, "Title"],
+
+Cell[CellGroupData[{
+Cell[1839, 57, 28, 0, 38, "Subsection"],
+Cell[1870, 59, 55, 3, 46, "Text"],
+Cell[1928, 64, 314, 10, 30, "Text"],
+Cell[2245, 76, 331, 10, 30, "Text"],
+Cell[2579, 88, 829, 22, 62, "Text"],
+Cell[3411, 112, 101, 3, 30, "Text"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[3549, 120, 40, 0, 38, "Subsection"],
+Cell[3592, 122, 69, 3, 46, "Text"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[3698, 130, 36, 0, 38, "Subsection"],
+Cell[3737, 132, 91, 2, 27, "Input",
+  InitializationCell->True]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[3865, 139, 23, 0, 69, "Section"],
+
+Cell[CellGroupData[{
+Cell[3913, 143, 189, 7, 57, "Input"],
+Cell[4105, 152, 25657, 697, 182, 3967, 424, "GraphicsData", "PostScript", \
+"Graphics",
+  Evaluatable->False],
+Cell[29765, 851, 153, 8, 25, "Output",
+  Evaluatable->False]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[29967, 865, 24, 0, 69, "Section"],
+
+Cell[CellGroupData[{
+Cell[30016, 869, 273, 7, 27, "Input"],
+Cell[30292, 878, 3244, 82, 173, "Output"]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[33585, 966, 33, 0, 69, "Section"],
+Cell[33621, 968, 44, 0, 30, "Text"],
+Cell[33668, 970, 7373, 161, 181, "Input"],
+Cell[41044, 1133, 175, 5, 26, "Input"],
+Cell[41222, 1140, 3394, 82, 123, "Input"],
+
+Cell[CellGroupData[{
+Cell[44641, 1226, 1067, 25, 43, "Input"],
+Cell[45711, 1253, 2321, 69, 58, "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[48069, 1327, 782, 20, 27, "Input"],
+Cell[48854, 1349, 446, 12, 42, "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[49337, 1366, 1004, 25, 43, "Input"],
+Cell[50344, 1393, 446, 12, 42, "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[50827, 1410, 1151, 29, 59, "Input"],
+Cell[51981, 1441, 1367, 35, 115, "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[53385, 1481, 223, 6, 27, "Input"],
+Cell[53611, 1489, 253, 7, 42, "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[53901, 1501, 1286, 32, 59, "Input"],
+Cell[55190, 1535, 766, 21, 59, "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[55993, 1561, 223, 6, 27, "Input"],
+Cell[56219, 1569, 380, 10, 42, "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[56636, 1584, 762, 21, 27, "Input"],
+Cell[57401, 1607, 657, 17, 42, "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[58095, 1629, 3879, 83, 139, "Input"],
+Cell[61977, 1714, 355, 7, 21, "Message"],
+Cell[62335, 1723, 355, 7, 21, "Message"],
+Cell[62693, 1732, 416, 10, 42, "Output"]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[63158, 1748, 26, 0, 69, "Section"],
+
+Cell[CellGroupData[{
+Cell[63209, 1752, 135, 5, 27, "Input"],
+Cell[63347, 1759, 334, 9, 28, "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[63718, 1773, 99, 2, 27, "Input"],
+Cell[63820, 1777, 4925, 127, 87, "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[68782, 1909, 407, 11, 31, "Input"],
+Cell[69192, 1922, 2983, 78, 84, "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[72212, 2005, 319, 8, 27, "Input"],
+Cell[72534, 2015, 1137, 31, 47, "Output"]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[73720, 2052, 46, 0, 69, "Section"],
+Cell[73769, 2054, 740, 21, 43, "Input"],
+
+Cell[CellGroupData[{
+Cell[74534, 2079, 353, 10, 27, "Input"],
+Cell[74890, 2091, 1067, 25, 45, "Output"]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[76006, 2122, 23, 0, 69, "Section"],
+
+Cell[CellGroupData[{
+Cell[76054, 2126, 67, 1, 27, "Input"],
+Cell[76124, 2129, 100, 1, 23, "Print"],
+Cell[76227, 2132, 82, 1, 23, "Print"],
+Cell[76312, 2135, 87, 1, 23, "Print"],
+Cell[76402, 2138, 108, 1, 23, "Print"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[76547, 2144, 1880, 46, 171, "Input"],
+Cell[78430, 2192, 195, 5, 21, "Message"],
+Cell[78628, 2199, 741, 18, 203, "Print"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[79406, 2222, 1839, 44, 187, "Input"],
+Cell[81248, 2268, 195, 5, 21, "Message"],
+Cell[81446, 2275, 744, 19, 203, "Print"]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]]
+}
+]
+*)
+
+
+
+(*******************************************************************
+End of Mathematica Notebook file.
+*******************************************************************)
+
