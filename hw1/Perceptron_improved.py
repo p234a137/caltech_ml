@@ -87,9 +87,9 @@ def pla(number_iterations,number_training,do_plot):
 
 # In[57]:
 
+number_training=10
+number_max_iterations=100
 number_runs=1000
-number_training=100
-number_max_iterations=100000
 sum_iter=0
 sum_probs=0
 for irun in range(1,number_runs):
@@ -100,8 +100,8 @@ for irun in range(1,number_runs):
     # sum up iterations to use for calculating average
     if iter > -1:
         sum_iter += iter
-    else:
-        print iter
+    #else:
+    #    print iter
     # calculate P[ hyp != trg ]
     def fun_trg(x):
         return y1+(x-x1)*(y2-y1)/(x2-x1)
